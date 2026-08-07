@@ -7,24 +7,24 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
-      
+
   # 2. R code formatting and linting
   - repo: https://github.com/lorenzwalthert/precommit
     rev: v0.4.3
     hooks:
       - id: style-files
-        style_pkg: styler
+        args: [--style_pkg=styler]
       - id: lintr
       - id: roxygenize
       - id: use-tidy-description
-      
+
   # 3. C++ formatting
   - repo: https://github.com/pre-commit/mirrors-clang-format
     rev: v18.1.5
     hooks:
       - id: clang-format
         types_or: [c++, c]
-        
+
   # 4. Commitizen hook
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v3.27.0
