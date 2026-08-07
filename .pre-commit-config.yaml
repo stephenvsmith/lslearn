@@ -1,12 +1,21 @@
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+  - pre-push
+
 repos:
   # 1. Standard file fixes
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
       - id: trailing-whitespace
+        stages: [pre-commit, pre-push]
       - id: end-of-file-fixer
+        stages: [pre-commit, pre-push]
       - id: check-yaml
+        stages: [pre-commit, pre-push]
       - id: check-added-large-files
+        stages: [pre-commit, pre-push]
 
   # 2. R code formatting and linting
   - repo: https://github.com/lorenzwalthert/precommit
@@ -14,9 +23,13 @@ repos:
     hooks:
       - id: style-files
         args: [--style_pkg=styler]
+        stages: [pre-commit, pre-push]
       - id: lintr
+        stages: [pre-commit, pre-push]
       - id: roxygenize
+        stages: [pre-commit, pre-push]
       - id: use-tidy-description
+        stages: [pre-commit, pre-push]
 
   # 3. C++ formatting
   - repo: https://github.com/pre-commit/mirrors-clang-format
@@ -24,6 +37,7 @@ repos:
     hooks:
       - id: clang-format
         types_or: [c++, c]
+        stages: [pre-commit, pre-push]
 
   # 4. Commitizen hook
   - repo: https://github.com/commitizen-tools/commitizen
@@ -31,3 +45,12 @@ repos:
     hooks:
       - id: commitizen
         stages: [commit-msg]
+
+  - repo: local
+    hooks:
+      - id: r-check
+        name: R CMD check
+        entry: R CMD check .
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
