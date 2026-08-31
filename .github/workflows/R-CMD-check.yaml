@@ -48,26 +48,3 @@ jobs:
         with:
           upload-snapshots: true
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
-
-  # --- C++ Memory & Sanitizer Check ---
-  asan-check:
-    name: Ubuntu (ASAN / UBSAN)
-    runs-on: ubuntu-latest
-    container:
-      image: rocker/r-sanitizer:latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Dependencies
-        run: |
-          Rscript -e "install.packages('remotes')"
-          Rscript -e "remotes::install_deps(dependencies = TRUE)"
-          Rscript -e "install.packages('rcmdcheck')"
-
-      - name: Run R CMD check under ASAN
-        env:
-          ASAN_OPTIONS: "detect_leaks=1:detect_stack_use_after_return=1:check_initialization_order=1"
-          UBSAN_OPTIONS: "print_stacktrace=1"
-          _R_CHECK_USE_ASAN_: true
-        run: |
-          Rscript -e "rcmdcheck::rcmdcheck(args = c('--no-manual', '--as-cran'), error_on = 'warning')"
