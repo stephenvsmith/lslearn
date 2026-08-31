@@ -1,3 +1,8 @@
+ci:
+  autofix_commit_msg: 'style: auto-fix pre-commit hooks'
+  autoupdate_commit_msg: 'chore: pre-commit autoupdate'
+  skip: [r-cmd-check] # Skip heavy local R CMD check on pre-commit.ci since GHA handles it
+
 default_install_hook_types:
   - pre-commit
   - commit-msg
