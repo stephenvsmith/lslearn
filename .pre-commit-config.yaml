@@ -30,6 +30,12 @@ repos:
         stages: [pre-commit, pre-push]
       - id: use-tidy-description
         stages: [pre-commit, pre-push]
+      - id: no-browser-statement
+        stages: [pre-commit, pre-push]
+      - id: deps-in-desc
+        stages: [pre-commit]
+      - id: parsable-R
+        stages: [pre-commit]
 
   # 3. C++ formatting
   - repo: https://github.com/pre-commit/mirrors-clang-format
@@ -54,3 +60,9 @@ repos:
         language: system
         pass_filenames: false
         stages: [pre-push]
+      - id: rcpp-compile-attributes
+        name: Rcpp compileAttributes
+        entry: Rscript -e "Rcpp:compileAttributes()"
+        language: system
+        files: ^src/
+        stages: [pre-commit]
