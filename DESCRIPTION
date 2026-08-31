@@ -1,0 +1,5 @@
+Type: Package
+Package: lslearn
+Title: Local Structure Learning
+Version: 0.1.0
+Encoding: UTF-8

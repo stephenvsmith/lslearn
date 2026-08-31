@@ -1,0 +1,68 @@
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+  - pre-push
+
+repos:
+  # 1. Standard file fixes
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        stages: [pre-commit, pre-push]
+      - id: end-of-file-fixer
+        stages: [pre-commit, pre-push]
+      - id: check-yaml
+        stages: [pre-commit, pre-push]
+      - id: check-added-large-files
+        stages: [pre-commit, pre-push]
+
+  # 2. R code formatting and linting
+  - repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.4.3
+    hooks:
+      - id: style-files
+        args: [--style_pkg=styler]
+        stages: [pre-commit, pre-push]
+      - id: lintr
+        stages: [pre-commit, pre-push]
+      - id: roxygenize
+        stages: [pre-commit, pre-push]
+      - id: use-tidy-description
+        stages: [pre-commit, pre-push]
+      - id: no-browser-statement
+        stages: [pre-commit, pre-push]
+      - id: deps-in-desc
+        stages: [pre-commit]
+      - id: parsable-R
+        stages: [pre-commit]
+
+  # 3. C++ formatting
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v18.1.5
+    hooks:
+      - id: clang-format
+        types_or: [c++, c]
+        stages: [pre-commit, pre-push]
+
+  # 4. Commitizen hook
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.27.0
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+
+  - repo: local
+    hooks:
+      - id: r-cmd-check
+        name: R CMD check
+        entry: Rscript -e "rcmdcheck::rcmdcheck('.', args = '--no-manual')"
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+      - id: rcpp-compile-attributes
+        name: Rcpp compileAttributes
+        entry: Rscript -e "Rcpp:compileAttributes()"
+        language: system
+        files: ^src/
+        stages: [pre-commit]
