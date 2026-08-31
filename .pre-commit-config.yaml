@@ -48,9 +48,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: r-check
+      - id: r-cmd-check
         name: R CMD check
-        entry: R CMD check .
+        entry: Rscript -e "rcmdcheck::rcmdcheck('.', args = '--no-manual')"
         language: system
         pass_filenames: false
         stages: [pre-push]
