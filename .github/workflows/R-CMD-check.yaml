@@ -54,7 +54,7 @@ jobs:
     name: Ubuntu (ASAN / UBSAN)
     runs-on: ubuntu-latest
     container:
-      image: rhub/asan
+      image: ghcr.io/r-hub/asan:latest
     steps:
       - uses: actions/checkout@v4
 
