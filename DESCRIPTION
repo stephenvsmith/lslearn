@@ -7,8 +7,7 @@ Description: In learning the structure of a causal DAG, users frequently want to
     on select target nodes to focus their efforts. The algorithms implemented in this package
     facilitate structure learning and edge orientation based on the local neighborhoods of
     select target nodes, as well as coordinate the information between the set of neighborhoods.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.0
