@@ -5,3 +5,9 @@ docs
 coverage/
 ..Rcheck/
 .Rhistory
+
+# renv infrastructure
+renv/library/
+renv/python/
+renv/sandbox/
+renv/staging/
