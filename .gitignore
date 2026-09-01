@@ -1,0 +1,5 @@
+docs
+*.gcov
+*.gcda
+*.gcno
+coverage/
