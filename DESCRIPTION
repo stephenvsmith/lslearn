@@ -7,6 +7,9 @@ Description: In learning the structure of a causal DAG, users frequently want to
     on select target nodes to focus their efforts. The algorithms implemented in this package
     facilitate structure learning and edge orientation based on the local neighborhoods of
     select target nodes, as well as coordinate the information between the set of neighborhoods.
+URL: https://github.com/stephenvsmith/lslearn,
+  https://stephenvsmith.github.io/lslearn/
+BugReports: https://github.com/stephenvsmith/lslearn/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
