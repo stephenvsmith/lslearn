@@ -14,9 +14,9 @@ repos:
     rev: v4.6.0
     hooks:
       - id: trailing-whitespace
-        stages: [pre-commit, pre-push]
+        stages: [pre-commit, commit-msg, pre-push]
       - id: end-of-file-fixer
-        stages: [pre-commit, pre-push]
+        stages: [pre-commit, commit-msg, pre-push]
       - id: check-yaml
         stages: [pre-commit, pre-push]
       - id: check-added-large-files
