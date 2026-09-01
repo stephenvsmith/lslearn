@@ -1,7 +1,9 @@
+exclude: ^(R/RcppExports\.R|src/RcppExports\.cpp)$
+
 ci:
   autofix_commit_msg: 'style: auto-fix pre-commit hooks'
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
-  skip: [r-cmd-check] # Skip heavy local R CMD check on pre-commit.ci since GHA handles it
+  skip: [roxygenize, rcpp-compile-attributes, r-cmd-check]
 
 default_install_hook_types:
   - pre-commit
@@ -56,17 +58,18 @@ repos:
       - id: commitizen
         stages: [commit-msg]
 
+  # 5. Local R Hooks with renv autoloader disabled
   - repo: local
     hooks:
       - id: r-cmd-check
         name: R CMD check
-        entry: Rscript -e "rcmdcheck::rcmdcheck('.', args = '--no-manual')"
+        entry: env RENV_CONFIG_AUTOLOADER_ENABLED=false Rscript -e "rcmdcheck::rcmdcheck('.', args = '--no-manual')"
         language: system
         pass_filenames: false
         stages: [pre-push]
       - id: rcpp-compile-attributes
         name: Rcpp compileAttributes
-        entry: Rscript -e "Rcpp::compileAttributes()"
+        entry: env RENV_CONFIG_AUTOLOADER_ENABLED=false Rscript -e "Rcpp::compileAttributes()"
         language: system
         files: ^src/
         stages: [pre-commit]

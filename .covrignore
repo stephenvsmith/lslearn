@@ -1,0 +1,5 @@
+src/RcppExports.cpp
+R/RcppExports.R
+src/test-runner.cpp
+src/test-example.cpp
+src/test-euclidean.cpp
