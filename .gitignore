@@ -3,3 +3,5 @@ docs
 *.gcda
 *.gcno
 coverage/
+..Rcheck/
+.Rhistory
