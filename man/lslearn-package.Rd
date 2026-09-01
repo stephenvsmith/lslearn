@@ -20,10 +20,5 @@ Useful links:
 \author{
 \strong{Maintainer}: Stephen Smith \email{stephensmith13424@gmail.com}
 
-Authors:
-\itemize{
-  \item Stephen Smith \email{stephensmith13424@gmail.com}
-}
-
 }
 \keyword{internal}

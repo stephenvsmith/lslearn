@@ -6,31 +6,32 @@
 using namespace Rcpp;
 
 #ifdef RCPP_USE_GLOBAL_ROSTREAM
-Rcpp::Rostream<true> &Rcpp::Rcout = Rcpp::Rcpp_cout_get();
-Rcpp::Rostream<false> &Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // euclidean_dist
 double euclidean_dist(NumericVector x, NumericVector y);
 RcppExport SEXP _lslearn_euclidean_dist(SEXP xSEXP, SEXP ySEXP) {
-  BEGIN_RCPP
-  Rcpp::RObject rcpp_result_gen;
-  Rcpp::RNGScope rcpp_rngScope_gen;
-  Rcpp::traits::input_parameter<NumericVector>::type x(xSEXP);
-  Rcpp::traits::input_parameter<NumericVector>::type y(ySEXP);
-  rcpp_result_gen = Rcpp::wrap(euclidean_dist(x, y));
-  return rcpp_result_gen;
-  END_RCPP
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(euclidean_dist(x, y));
+    return rcpp_result_gen;
+END_RCPP
 }
 
 RcppExport SEXP run_testthat_tests(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_lslearn_euclidean_dist", (DL_FUNC)&_lslearn_euclidean_dist, 2},
-    {"run_testthat_tests", (DL_FUNC)&run_testthat_tests, 1},
-    {NULL, NULL, 0}};
+    {"_lslearn_euclidean_dist", (DL_FUNC) &_lslearn_euclidean_dist, 2},
+    {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
+    {NULL, NULL, 0}
+};
 
 RcppExport void R_init_lslearn(DllInfo *dll) {
-  R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
-  R_useDynamicSymbols(dll, FALSE);
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
