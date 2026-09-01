@@ -1,0 +1,2 @@
+Checks: '-*,clang-diagnostic-*,performance-*,bugprone-*,readability-*'
+WarningsAsErrors: ''
