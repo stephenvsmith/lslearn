@@ -27,16 +27,15 @@ repos:
     rev: v0.4.3
     hooks:
       - id: style-files
-        args: [--style_pkg=styler]
-        stages: [pre-commit, pre-push]
+        stages: [pre-commit]
       - id: lintr
-        stages: [pre-commit, pre-push]
+        stages: [pre-commit]
       - id: roxygenize
-        stages: [pre-commit, pre-push]
+        stages: [pre-commit]
       - id: use-tidy-description
-        stages: [pre-commit, pre-push]
+        stages: [pre-commit]
       - id: no-browser-statement
-        stages: [pre-commit, pre-push]
+        stages: [pre-commit]
       - id: deps-in-desc
         stages: [pre-commit]
       - id: parsable-R
@@ -48,7 +47,7 @@ repos:
     hooks:
       - id: clang-format
         types_or: [c++, c]
-        stages: [pre-commit, pre-push]
+        stages: [pre-commit]
 
   # 4. Commitizen hook
   - repo: https://github.com/commitizen-tools/commitizen
@@ -67,7 +66,7 @@ repos:
         stages: [pre-push]
       - id: rcpp-compile-attributes
         name: Rcpp compileAttributes
-        entry: Rscript -e "Rcpp:compileAttributes()"
+        entry: Rscript -e "Rcpp::compileAttributes()"
         language: system
         files: ^src/
         stages: [pre-commit]
