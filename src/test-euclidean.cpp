@@ -1,5 +1,5 @@
-#include <testthat.h>
 #include <Rcpp.h>
+#include <testthat.h>
 
 // Forward declaration of the C++ function under test
 double euclidean_dist(Rcpp::NumericVector x, Rcpp::NumericVector y);
@@ -27,5 +27,4 @@ context("Euclidean Distance C++ Unit Tests") {
 
     expect_error(euclidean_dist(p1, p2));
   }
-
 }

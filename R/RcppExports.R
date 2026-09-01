@@ -9,3 +9,4 @@
 euclidean_dist <- function(x, y) {
     .Call(`_lslearn_euclidean_dist`, x, y)
 }
+
