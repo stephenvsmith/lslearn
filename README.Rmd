@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 # lslearn
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/stephenvsmith/lslearn/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/stephenvsmith/lslearn/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/stephenvsmith/lslearn/branch/main/graph/badge.svg)](https://app.codecov.io/gh/stephenvsmith/lslearn)
 <!-- badges: end -->
 
 The goal of lslearn is to ...
