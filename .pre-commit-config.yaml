@@ -3,7 +3,7 @@ exclude: ^(R/RcppExports\.R|src/RcppExports\.cpp)$
 ci:
   autofix_commit_msg: 'style: auto-fix pre-commit hooks'
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
-  skip: [r-cmd-check] # Skip heavy local R CMD check on pre-commit.ci since GHA handles it
+  skip: [roxygenize, rcpp-compile-attributes, r-cmd-check]
 
 default_install_hook_types:
   - pre-commit
