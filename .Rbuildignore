@@ -10,3 +10,6 @@
 ^codecov\.yml$
 ^\.covrignore$
 ^coverage$
+^\.clang-format$
+^\.clang-tidy$
+^\.lintr$
