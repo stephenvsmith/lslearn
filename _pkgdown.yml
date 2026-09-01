@@ -6,11 +6,3 @@ navbar:
   structure:
     left:  [intro, reference, articles, news]
     right: [github]
-
-reference:
-  - title: "Model Fitting"
-    contents:
-      - fit_ls
-  - title: "C++ Accelerators"
-    contents:
-      - fast_matmul
