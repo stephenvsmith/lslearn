@@ -58,7 +58,7 @@ double get_G2_one(arma::vec A, arma::vec B, int tot_Au_size, int tot_Bu_size) {
   for (int m = 0; m < Au_size; m++) {
     for (int n = 0; n < Bu_size; n++) {
       for (int i = 0; i < A_size; i++) {
-        if ((A[i] == A_uniq[m]) & (B[i] == B_uniq[n])) {
+        if ((A[i] == A_uniq[m]) && (B[i] == B_uniq[n])) {
           O(m, n)++;
         }
       }

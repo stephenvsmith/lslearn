@@ -72,6 +72,9 @@ std::map<int, int> test_map_insert(IntegerVector v1, IntegerVector v2) {
 void test_map_find(IntegerVector v1, IntegerVector v2, int a) {
   std::map<int, int> m = test_map_insert(v1, v2);
   std::map<int, int>::iterator it = m.find(a);
+  if (it == m.end()) {
+    stop("Key not found in map.");
+  }
   Rcout << "(" << it->first << "," << it->second << ")\n";
 }
 

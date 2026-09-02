@@ -41,10 +41,10 @@ test_that("Testing Map Data Structure", {
   set.seed(111)
   v1 <- sample(1:10, 5)
   v2 <- sample(40:50, 5)
-  ind <- order(v1)
   (m <- test_map_insert(v1, v2))
+  a <- v1[1]
 
-  expect_output(test_map_find(v1, v2, 3))
+  expect_output(test_map_find(v1, v2, a))
 })
 
 test_that("Testing combn", {
