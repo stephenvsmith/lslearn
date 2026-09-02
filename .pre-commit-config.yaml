@@ -3,7 +3,18 @@ exclude: ^(R/RcppExports\.R|src/RcppExports\.cpp)$
 ci:
   autofix_commit_msg: 'style: auto-fix pre-commit hooks'
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
-  skip: [roxygenize, rcpp-compile-attributes, r-cmd-check]
+  skip:
+    [
+      roxygenize,
+      rcpp-compile-attributes,
+      r-cmd-check,
+      style-files,
+      lintr,
+      use-tidy-description,
+      no-browser-statement,
+      deps-in-desc,
+      parsable-R,
+    ]
 
 default_install_hook_types:
   - pre-commit
@@ -26,7 +37,7 @@ repos:
 
   # 2. R code formatting and linting
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.3
+    rev: v0.4.3.9032
     hooks:
       - id: style-files
         stages: [pre-commit]
