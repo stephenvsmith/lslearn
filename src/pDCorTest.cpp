@@ -53,7 +53,7 @@ double get_G2_one(arma::vec A, arma::vec B, int tot_Au_size, int tot_Bu_size) {
   int A_size = A.size();
 
   // Counting each combination
-  arma::mat O(tot_Au_size, tot_Bu_size);
+  arma::mat O(tot_Au_size, tot_Bu_size, arma::fill::zeros);
 
   for (int m = 0; m < Au_size; m++) {
     for (int n = 0; n < Bu_size; n++) {
@@ -152,11 +152,7 @@ List condInttestdis(arma::mat df, const size_t &i, const size_t &j,
   arma::mat S_m(df.n_rows, k_size);
 
   arma::vec A_u = unique(A);
-  // NOTE: this should likely be unique(B) -- as written, B_u is derived
-  // from A, which makes the `dof` calculation below wrong whenever A and B
-  // have different numbers of levels. Ported as-is from the original CML
-  // implementation; flagged here rather than silently changed.
-  arma::vec B_u = unique(A);
+  arma::vec B_u = unique(B);
 
   int S_df = 1;
 
