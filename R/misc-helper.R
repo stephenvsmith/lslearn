@@ -77,15 +77,18 @@ my_dsep <- function(true_dag, x, y, z) {
   }
   bnlearn::amat(tmp) <- true_dag
 
-  if (nrow(z) == 0) {
+  if (length(z) == 0) {
     res <- as.numeric(
       bnlearn::dsep(tmp, as.character(x + 1), as.character(y + 1))
     )
   } else {
+    if (!is.null(dim(z))) {
+      z <- z[, 1]
+    }
     res <- as.numeric(
       bnlearn::dsep(
         tmp, as.character(x + 1), as.character(y + 1),
-        as.character(z[, 1] + 1)
+        as.character(z + 1)
       )
     )
   }
