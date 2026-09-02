@@ -1,11 +1,76 @@
 # lslearn
 
-The goal of lslearn is to …
+lslearn implements **Coordinated Multi-Neighborhood Learning (CML)**, a
+constraint-based algorithm for learning the *local* causal structure
+around a set of user-specified target nodes in a directed acyclic graph
+(DAG), without estimating the entire graph structure or the subset of
+the graph that is not directly relevant to the target nodes.
+
+## Why local structure learning?
+
+Global causal discovery algorithms (e.g. PC, FCI) attempt to recover
+information encoded in the whole DAG, but this is often more than
+researchers need and scales poorly as the number of variables grows. In
+many applications, the research question only requires recovering the
+parents (and children) of a small set of target nodes, so that their
+causal effects can be estimated via the back-door adjustment. For
+example, this approach could be used to identify the regulators of a set
+of selected genes in a gene regulatory network.
+
+lslearn’s algorithms restrict computation to the neighborhoods of the
+target nodes:
+
+- **CML** estimates the local structure around *multiple* target
+  neighborhoods simultaneously, coordinating edge orientation between
+  them. Even when target neighborhoods are disjoint, causal information
+  can propagate between them through ancestral relationships (inducing
+  paths), which lets CML orient edges that would be unidentifiable if
+  each neighborhood were learned in isolation.
+- **SNL** (Single Neighborhood Learning) is the uncoordinated baseline:
+  it applies constraint-based structure learning to each target
+  neighborhood independently without recourse to any rules to translate
+  ancestral information between neighborhoods.
+
+Both algorithms first estimate the first- and second-order neighbors of
+each target node, then recover the local skeleton via conditional
+independence (CI) testing. The rules for edge orientation is where both
+algorithms diverge. The CML algorithm orients edges using a subset of
+FCI’s rules and a specialized rule for the local learning context. The
+SNL algorithm uses Meek’s (from the PC algorithm) for basic edge
+orientation.
+
+Compared to applying a global algorithm and restricting attention to the
+target neighborhoods afterward, CML is both more accurate by avoiding
+errors from other parts of the graph and cheaper computationally, since
+the number of conditional independence tests scales with the size of the
+target neighborhoods rather than the size of the whole network.
+
+### Reference
+
+Smith, S. and Zhou, Q. (2026). *Coordinated Multi-Neighborhood Learning
+on a Directed Acyclic Graph.*
+
+The paper includes the algorithm details, soundness/completeness
+results, consistency guarantees (including in the high-dimensional
+setting), and empirical comparisons against the global PC algorithm and
+the SNL baseline on both simulated networks and a gene expression data
+set.
+
+## Status
+
+lslearn is a ground-up, more rigorously engineered reimplementation of
+the algorithms originally prototyped in
+[stephenvsmith/CML](https://github.com/stephenvsmith/CML), the package
+used to produce the results in the paper above. The migration is in
+progress and being landed in small, reviewable pieces, so not all
+algorithms described in the paper are implemented and exported yet.
+Check the [issues](https://github.com/stephenvsmith/lslearn/issues) and
+open pull requests for the current state of the migration.
 
 ## Installation
 
-You can install the development version of lslearn from
-[GitHub](https://github.com/) with:
+lslearn is not yet on CRAN. Install the development version from
+[GitHub](https://github.com/stephenvsmith/lslearn) with:
 
 ``` r
 
@@ -13,40 +78,101 @@ You can install the development version of lslearn from
 pak::pak("stephenvsmith/lslearn")
 ```
 
-## Example
+Because lslearn links to compiled code (via Rcpp and RcppArmadillo) and
+imports packages with their own system requirements, installing it
+requires:
 
-This is a basic example which shows you how to solve a common problem:
+- A C++ compiler toolchain (Xcode Command Line Tools on macOS, Rtools on
+  Windows, or build-essential on Debian/Ubuntu).
+- The [GNU Scientific Library](https://www.gnu.org/software/gsl/) (GSL),
+  required by one of lslearn’s dependencies. Install it via
+  `brew install gsl` on macOS or `apt install libgsl-dev` on
+  Debian/Ubuntu before installing lslearn.
+
+## Contributing
+
+Contributions are welcome. This section covers how to get a local
+development environment set up.
+
+### Prerequisites
+
+- A recent R release (4.4 or later is recommended — some dependencies
+  may not have binaries available for older R versions on all
+  platforms).
+- [GSL](https://www.gnu.org/software/gsl/) and a C++ toolchain, as
+  described above.
+- [Pandoc](https://pandoc.org/), needed to build package documentation
+  and the pkgdown site.
+- [`pre-commit`](https://pre-commit.com/#install), the tool that runs
+  this repo’s code quality checks. Install it with
+  `pipx install pre-commit`, `brew install pre-commit`, or
+  `pip install pre-commit`.
+
+### Setup
+
+1.  Clone the repository and open it in R (or RStudio) at the repo root,
+    so that `.Rprofile` activates the project’s
+    [renv](https://rstudio.github.io/renv/) environment automatically.
+
+2.  Install the git hooks defined in `.pre-commit-config.yaml`:
+
+    ``` sh
+    pre-commit install
+    ```
+
+    This setup includes three stages:
+
+    - **pre-commit**: automatically styles and lints changed R files
+      (`styler`, `lintr`), regenerates `NAMESPACE`/documentation when
+      needed, formats changed C++ files (`clang-format`), and
+      regenerates `RcppExports` when files under `src/` change.
+    - **commit-msg**: enforces a [Conventional
+      Commits](https://www.conventionalcommits.org/) style commit
+      message (via `commitizen`), e.g. `fix: ...`, `feat: ...`,
+      `build: ...`.
+    - **pre-push**: runs a full `R CMD check` before code is pushed.
+
+3.  Install lslearn’s dependencies and build the package itself:
+
+    ``` r
+
+    renv::install(".")
+    ```
+
+    This resolves and installs whatever dependency versions currently
+    satisfy `DESCRIPTION`, then builds and installs lslearn. If you
+    instead want the exact dependency versions pinned in `renv.lock`
+    (what CI uses), run
+    [`renv::restore()`](https://rstudio.github.io/renv/reference/restore.html)
+    first — note this can occasionally be slower if a pinned version
+    predates the binaries CRAN currently serves for your R version.
+
+### Running tests
 
 ``` r
 
-library(lslearn)
-## basic example code
+testthat::test_check("lslearn")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+or run the full package check that mirrors CI:
 
 ``` r
 
-summary(cars)
-#>      speed           dist
-#>  Min.   : 4.0   Min.   :  2.00
-#>  1st Qu.:12.0   1st Qu.: 26.00
-#>  Median :15.0   Median : 36.00
-#>  Mean   :15.4   Mean   : 42.98
-#>  3rd Qu.:19.0   3rd Qu.: 56.00
-#>  Max.   :25.0   Max.   :120.00
+rcmdcheck::rcmdcheck(".", args = "--no-manual")
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+(Run these from an R console, e.g. in RStudio. From a plain shell
+instead, wrap them as `Rscript -e '...'`.)
 
-You can also embed plots, for example:
+Every pull request is also validated by GitHub Actions across multiple
+platforms and R versions (`R-CMD-check.yaml`), plus code coverage
+(`coverage.yaml`) and the documentation site build (`pkgdown.yaml`).
 
-![](reference/figures/README-pressure-1.png)
+### License
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+lslearn is licensed under [GPL (\>=
+3)](https://stephenvsmith.github.io/lslearn/LICENSE.md), consistent with
+the GPL-licensed dependencies (`RcppArmadillo`) it links against.
 
 # Package index
 
