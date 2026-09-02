@@ -3,7 +3,18 @@ exclude: ^(R/RcppExports\.R|src/RcppExports\.cpp)$
 ci:
   autofix_commit_msg: 'style: auto-fix pre-commit hooks'
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
-  skip: [roxygenize, rcpp-compile-attributes, r-cmd-check]
+  skip:
+    [
+      roxygenize,
+      rcpp-compile-attributes,
+      r-cmd-check,
+      style-files,
+      lintr,
+      use-tidy-description,
+      no-browser-statement,
+      deps-in-desc,
+      parsable-R,
+    ]
 
 default_install_hook_types:
   - pre-commit
