@@ -11,6 +11,30 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// combn_cpp
+NumericMatrix combn_cpp(NumericVector x, size_t l);
+RcppExport SEXP _lslearn_combn_cpp(SEXP xSEXP, SEXP lSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< size_t >::type l(lSEXP);
+    rcpp_result_gen = Rcpp::wrap(combn_cpp(x, l));
+    return rcpp_result_gen;
+END_RCPP
+}
+// isMember
+bool isMember(NumericVector x, const size_t& i);
+RcppExport SEXP _lslearn_isMember(SEXP xSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const size_t& >::type i(iSEXP);
+    rcpp_result_gen = Rcpp::wrap(isMember(x, i));
+    return rcpp_result_gen;
+END_RCPP
+}
 // euclidean_dist
 double euclidean_dist(NumericVector x, NumericVector y);
 RcppExport SEXP _lslearn_euclidean_dist(SEXP xSEXP, SEXP ySEXP) {
@@ -23,11 +47,307 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// getPartialCorrelation
+double getPartialCorrelation(arma::mat C, size_t i, size_t j, arma::uvec k);
+RcppExport SEXP _lslearn_getPartialCorrelation(SEXP CSEXP, SEXP iSEXP, SEXP jSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type C(CSEXP);
+    Rcpp::traits::input_parameter< size_t >::type i(iSEXP);
+    Rcpp::traits::input_parameter< size_t >::type j(jSEXP);
+    Rcpp::traits::input_parameter< arma::uvec >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(getPartialCorrelation(C, i, j, k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// fisherZ
+double fisherZ(double pc, size_t n, size_t k_size);
+RcppExport SEXP _lslearn_fisherZ(SEXP pcSEXP, SEXP nSEXP, SEXP k_sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type pc(pcSEXP);
+    Rcpp::traits::input_parameter< size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< size_t >::type k_size(k_sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(fisherZ(pc, n, k_size));
+    return rcpp_result_gen;
+END_RCPP
+}
+// condIndTest
+List condIndTest(arma::mat& C, const size_t& i, const size_t& j, const arma::uvec& k, const size_t& n, const double& signif_level);
+RcppExport SEXP _lslearn_condIndTest(SEXP CSEXP, SEXP iSEXP, SEXP jSEXP, SEXP kSEXP, SEXP nSEXP, SEXP signif_levelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type C(CSEXP);
+    Rcpp::traits::input_parameter< const size_t& >::type i(iSEXP);
+    Rcpp::traits::input_parameter< const size_t& >::type j(jSEXP);
+    Rcpp::traits::input_parameter< const arma::uvec& >::type k(kSEXP);
+    Rcpp::traits::input_parameter< const size_t& >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const double& >::type signif_level(signif_levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(condIndTest(C, i, j, k, n, signif_level));
+    return rcpp_result_gen;
+END_RCPP
+}
+// condIndTestPop
+List condIndTestPop(NumericMatrix G, const size_t& i, const size_t& j, const arma::uvec& k);
+RcppExport SEXP _lslearn_condIndTestPop(SEXP GSEXP, SEXP iSEXP, SEXP jSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type G(GSEXP);
+    Rcpp::traits::input_parameter< const size_t& >::type i(iSEXP);
+    Rcpp::traits::input_parameter< const size_t& >::type j(jSEXP);
+    Rcpp::traits::input_parameter< const arma::uvec& >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(condIndTestPop(G, i, j, k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// matrix_to_string
+arma::vec matrix_to_string(arma::mat sep_vectors);
+RcppExport SEXP _lslearn_matrix_to_string(SEXP sep_vectorsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type sep_vectors(sep_vectorsSEXP);
+    rcpp_result_gen = Rcpp::wrap(matrix_to_string(sep_vectors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_G2_one
+double get_G2_one(arma::vec A, arma::vec B, int tot_Au_size, int tot_Bu_size);
+RcppExport SEXP _lslearn_get_G2_one(SEXP ASEXP, SEXP BSEXP, SEXP tot_Au_sizeSEXP, SEXP tot_Bu_sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type A(ASEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type B(BSEXP);
+    Rcpp::traits::input_parameter< int >::type tot_Au_size(tot_Au_sizeSEXP);
+    Rcpp::traits::input_parameter< int >::type tot_Bu_size(tot_Bu_sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_G2_one(A, B, tot_Au_size, tot_Bu_size));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_G2_all
+double get_G2_all(arma::vec A, arma::vec B, arma::vec S);
+RcppExport SEXP _lslearn_get_G2_all(SEXP ASEXP, SEXP BSEXP, SEXP SSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type A(ASEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type B(BSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type S(SSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_G2_all(A, B, S));
+    return rcpp_result_gen;
+END_RCPP
+}
+// condInttestdis
+List condInttestdis(arma::mat df, const size_t& i, const size_t& j, const arma::uvec& k, const double& signif_level);
+RcppExport SEXP _lslearn_condInttestdis(SEXP dfSEXP, SEXP iSEXP, SEXP jSEXP, SEXP kSEXP, SEXP signif_levelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< const size_t& >::type i(iSEXP);
+    Rcpp::traits::input_parameter< const size_t& >::type j(jSEXP);
+    Rcpp::traits::input_parameter< const arma::uvec& >::type k(kSEXP);
+    Rcpp::traits::input_parameter< const double& >::type signif_level(signif_levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(condInttestdis(df, i, j, k, signif_level));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testArmaCor
+arma::mat testArmaCor(arma::mat M);
+RcppExport SEXP _lslearn_testArmaCor(SEXP MSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type M(MSEXP);
+    rcpp_result_gen = Rcpp::wrap(testArmaCor(M));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_union
+NumericVector test_union(NumericVector x, NumericVector y);
+RcppExport SEXP _lslearn_test_union(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(test_union(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_sort
+NumericVector test_sort(NumericVector x);
+RcppExport SEXP _lslearn_test_sort(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(test_sort(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_fill
+NumericVector test_fill(int nrow, int ncol, int value);
+RcppExport SEXP _lslearn_test_fill(SEXP nrowSEXP, SEXP ncolSEXP, SEXP valueSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nrow(nrowSEXP);
+    Rcpp::traits::input_parameter< int >::type ncol(ncolSEXP);
+    Rcpp::traits::input_parameter< int >::type value(valueSEXP);
+    rcpp_result_gen = Rcpp::wrap(test_fill(nrow, ncol, value));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_fill_diag
+NumericMatrix test_fill_diag(NumericMatrix x, int value);
+RcppExport SEXP _lslearn_test_fill_diag(SEXP xSEXP, SEXP valueSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type value(valueSEXP);
+    rcpp_result_gen = Rcpp::wrap(test_fill_diag(x, value));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_create
+NumericVector test_create(double x1, double x2);
+RcppExport SEXP _lslearn_test_create(SEXP x1SEXP, SEXP x2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x1(x1SEXP);
+    Rcpp::traits::input_parameter< double >::type x2(x2SEXP);
+    rcpp_result_gen = Rcpp::wrap(test_create(x1, x2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_setdiff
+NumericVector test_setdiff(NumericVector v1, NumericVector v2);
+RcppExport SEXP _lslearn_test_setdiff(SEXP v1SEXP, SEXP v2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type v1(v1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type v2(v2SEXP);
+    rcpp_result_gen = Rcpp::wrap(test_setdiff(v1, v2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_intersect
+NumericVector test_intersect(NumericVector v1, NumericVector v2);
+RcppExport SEXP _lslearn_test_intersect(SEXP v1SEXP, SEXP v2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type v1(v1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type v2(v2SEXP);
+    rcpp_result_gen = Rcpp::wrap(test_intersect(v1, v2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_map_insert
+std::map<int, int> test_map_insert(IntegerVector v1, IntegerVector v2);
+RcppExport SEXP _lslearn_test_map_insert(SEXP v1SEXP, SEXP v2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type v1(v1SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type v2(v2SEXP);
+    rcpp_result_gen = Rcpp::wrap(test_map_insert(v1, v2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_map_find
+void test_map_find(IntegerVector v1, IntegerVector v2, int a);
+RcppExport SEXP _lslearn_test_map_find(SEXP v1SEXP, SEXP v2SEXP, SEXP aSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type v1(v1SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type v2(v2SEXP);
+    Rcpp::traits::input_parameter< int >::type a(aSEXP);
+    test_map_find(v1, v2, a);
+    return R_NilValue;
+END_RCPP
+}
+// test_sep_arma
+arma::uvec test_sep_arma();
+RcppExport SEXP _lslearn_test_sep_arma() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(test_sep_arma());
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_subset_mat
+arma::mat test_subset_mat(arma::mat m, NumericVector i);
+RcppExport SEXP _lslearn_test_subset_mat(SEXP mSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type m(mSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type i(iSEXP);
+    rcpp_result_gen = Rcpp::wrap(test_subset_mat(m, i));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_NumMat_value
+NumericMatrix test_NumMat_value(NumericMatrix G);
+RcppExport SEXP _lslearn_test_NumMat_value(SEXP GSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type G(GSEXP);
+    rcpp_result_gen = Rcpp::wrap(test_NumMat_value(G));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_decrement_matrix
+void test_decrement_matrix(NumericMatrix& G);
+RcppExport SEXP _lslearn_test_decrement_matrix(SEXP GSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix& >::type G(GSEXP);
+    test_decrement_matrix(G);
+    return R_NilValue;
+END_RCPP
+}
 
 RcppExport SEXP run_testthat_tests(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_lslearn_combn_cpp", (DL_FUNC) &_lslearn_combn_cpp, 2},
+    {"_lslearn_isMember", (DL_FUNC) &_lslearn_isMember, 2},
     {"_lslearn_euclidean_dist", (DL_FUNC) &_lslearn_euclidean_dist, 2},
+    {"_lslearn_getPartialCorrelation", (DL_FUNC) &_lslearn_getPartialCorrelation, 4},
+    {"_lslearn_fisherZ", (DL_FUNC) &_lslearn_fisherZ, 3},
+    {"_lslearn_condIndTest", (DL_FUNC) &_lslearn_condIndTest, 6},
+    {"_lslearn_condIndTestPop", (DL_FUNC) &_lslearn_condIndTestPop, 4},
+    {"_lslearn_matrix_to_string", (DL_FUNC) &_lslearn_matrix_to_string, 1},
+    {"_lslearn_get_G2_one", (DL_FUNC) &_lslearn_get_G2_one, 4},
+    {"_lslearn_get_G2_all", (DL_FUNC) &_lslearn_get_G2_all, 3},
+    {"_lslearn_condInttestdis", (DL_FUNC) &_lslearn_condInttestdis, 5},
+    {"_lslearn_testArmaCor", (DL_FUNC) &_lslearn_testArmaCor, 1},
+    {"_lslearn_test_union", (DL_FUNC) &_lslearn_test_union, 2},
+    {"_lslearn_test_sort", (DL_FUNC) &_lslearn_test_sort, 1},
+    {"_lslearn_test_fill", (DL_FUNC) &_lslearn_test_fill, 3},
+    {"_lslearn_test_fill_diag", (DL_FUNC) &_lslearn_test_fill_diag, 2},
+    {"_lslearn_test_create", (DL_FUNC) &_lslearn_test_create, 2},
+    {"_lslearn_test_setdiff", (DL_FUNC) &_lslearn_test_setdiff, 2},
+    {"_lslearn_test_intersect", (DL_FUNC) &_lslearn_test_intersect, 2},
+    {"_lslearn_test_map_insert", (DL_FUNC) &_lslearn_test_map_insert, 2},
+    {"_lslearn_test_map_find", (DL_FUNC) &_lslearn_test_map_find, 3},
+    {"_lslearn_test_sep_arma", (DL_FUNC) &_lslearn_test_sep_arma, 0},
+    {"_lslearn_test_subset_mat", (DL_FUNC) &_lslearn_test_subset_mat, 2},
+    {"_lslearn_test_NumMat_value", (DL_FUNC) &_lslearn_test_NumMat_value, 1},
+    {"_lslearn_test_decrement_matrix", (DL_FUNC) &_lslearn_test_decrement_matrix, 1},
     {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
     {NULL, NULL, 0}
 };
