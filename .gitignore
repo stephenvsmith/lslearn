@@ -5,6 +5,7 @@ docs
 coverage/
 ..Rcheck/
 .Rhistory
+README.html
 
 # renv infrastructure
 renv/library/

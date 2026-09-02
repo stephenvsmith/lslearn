@@ -5,7 +5,6 @@ ci:
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
   skip:
     [
-      roxygenize,
       rcpp-compile-attributes,
       r-cmd-check,
       style-files,
@@ -42,8 +41,6 @@ repos:
       - id: style-files
         stages: [pre-commit]
       - id: lintr
-        stages: [pre-commit]
-      - id: roxygenize
         stages: [pre-commit]
       - id: use-tidy-description
         stages: [pre-commit]

@@ -24,6 +24,5 @@ LinkingTo:
     testthat
 Imports:
     bnlearn,
-    MXM,
     Rcpp (>= 1.0.8)
 RoxygenNote: 7.3.2
