@@ -35,18 +35,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// euclidean_dist
-double euclidean_dist(NumericVector x, NumericVector y);
-RcppExport SEXP _lslearn_euclidean_dist(SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(euclidean_dist(x, y));
-    return rcpp_result_gen;
-END_RCPP
-}
 // getPartialCorrelation
 double getPartialCorrelation(arma::mat C, size_t i, size_t j, arma::uvec k);
 RcppExport SEXP _lslearn_getPartialCorrelation(SEXP CSEXP, SEXP iSEXP, SEXP jSEXP, SEXP kSEXP) {
@@ -325,7 +313,6 @@ RcppExport SEXP run_testthat_tests(SEXP);
 static const R_CallMethodDef CallEntries[] = {
     {"_lslearn_combn_cpp", (DL_FUNC) &_lslearn_combn_cpp, 2},
     {"_lslearn_isMember", (DL_FUNC) &_lslearn_isMember, 2},
-    {"_lslearn_euclidean_dist", (DL_FUNC) &_lslearn_euclidean_dist, 2},
     {"_lslearn_getPartialCorrelation", (DL_FUNC) &_lslearn_getPartialCorrelation, 4},
     {"_lslearn_fisherZ", (DL_FUNC) &_lslearn_fisherZ, 3},
     {"_lslearn_condIndTest", (DL_FUNC) &_lslearn_condIndTest, 6},

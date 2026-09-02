@@ -9,15 +9,6 @@ isMember <- function(x, i) {
     .Call(`_lslearn_isMember`, x, i)
 }
 
-#' Calculate Euclidean Distance between two vectors
-#' @param x NumericVector
-#' @param y NumericVector
-#' @return double Euclidean distance
-#' @export
-euclidean_dist <- function(x, y) {
-    .Call(`_lslearn_euclidean_dist`, x, y)
-}
-
 getPartialCorrelation <- function(C, i, j, k) {
     .Call(`_lslearn_getPartialCorrelation`, C, i, j, k)
 }
