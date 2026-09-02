@@ -26,7 +26,7 @@ researchers need and scales poorly as the number of variables grows. In
 many applications, the research question only requires recovering the
 parents (and children) of a small set of target nodes, so that their
 causal effects can be estimated via the back-door adjustment. For
-example, this approach could be used to identify the regulators of set
+example, this approach could be used to identify the regulators of a set
 of selected genes in a gene regulatory network.
 
 lslearn’s algorithms restrict computation to the neighborhoods of the
