@@ -1,11 +1,21 @@
+// Small utility functions shared across lslearn's structure-learning
+// algorithms: enumerating combinations, membership testing, and (for
+// debugging) printing vectors/matrices and generating placeholder node
+// names.
 #include "SharedFunctions.h"
 using namespace Rcpp;
 
-/*
- * This function generates all possible combinations of a vector x of length l
- * and puts them in a matrix It uses the R function combn to produce the
- * results. Tested: 12/16/20 Confirmed: 11/23/22
- */
+//' All combinations of size l from a vector
+//'
+//' @param x Numeric vector of values to choose from.
+//' @param l Size of each combination.
+//' @return A numeric matrix with `l` rows, one column per combination
+//'   (delegating to R's `combn()` when there is more than one element to
+//'   choose from). When `l` is 0, returns a 1x1 matrix containing `NA`,
+//'   representing the (single) empty combination.
+//' @details
+//' Tested: 12/16/20. Confirmed: 11/23/22.
+//' @noRd
 // [[Rcpp::export]]
 NumericMatrix combn_cpp(NumericVector x, size_t l) {
   size_t xlength = x.length();
@@ -29,8 +39,13 @@ NumericMatrix combn_cpp(NumericVector x, size_t l) {
   return result;
 }
 
-// Determines whether or not i is in vector x
-// Tested: 11/23/22
+//' Test whether a value is present in a numeric vector
+//'
+//' @param x Numeric vector to search.
+//' @param i Value to search for.
+//' @return `TRUE` if `i` is an element of `x`, `FALSE` otherwise.
+//' @details Tested: 11/23/22.
+//' @noRd
 // [[Rcpp::export]]
 bool isMember(NumericVector x, const size_t &i) {
   NumericVector::iterator it = x.begin();
@@ -47,7 +62,12 @@ bool isMember(NumericVector x, const size_t &i) {
 }
 
 // PRINTING FUNCTIONS (DEBUGGING)
+// Not exported to R; for ad hoc debugging from C++ only.
 
+// Prints the elements of `v`, using `v` as indices into `names` (i.e. `v` is
+// treated as a vector of 0-based indices, and the corresponding node names
+// are printed rather than the raw values), separated by spaces and
+// surrounded by `opening`/`closing`.
 void printVecElements(NumericVector v, StringVector names, String opening,
                       String closing) {
   size_t ln = v.length();
@@ -61,6 +81,8 @@ void printVecElements(NumericVector v, StringVector names, String opening,
   Rcout << closing.get_cstring();
 }
 
+// Prints the raw elements of `v` (unlike `printVecElements()`, no name
+// lookup), separated by `sep` and surrounded by `opening`/`closing`.
 void printVecElementsNoNames(NumericVector v, String opening, String closing,
                              String sep) {
   size_t l = v.length();
@@ -74,6 +96,8 @@ void printVecElementsNoNames(NumericVector v, String opening, String closing,
   Rcout << closing.get_cstring();
 }
 
+// Prints `m` row by row, space-separated within a row and newline-separated
+// between rows.
 void printMatrix(NumericMatrix m) {
   size_t n = m.nrow();
   size_t p = m.ncol();
@@ -90,6 +114,8 @@ void printMatrix(NumericMatrix m) {
   }
 }
 
+// Appends p placeholder node names ("V0", "V1", ..., "V(p-1)") to
+// `node_names`, for use when the caller hasn't supplied real variable names.
 void makeNodeNames(int p, StringVector &node_names) {
   for (int i = 0; i < p; ++i) {
     String node("V");

@@ -1,3 +1,6 @@
+// Conditional independence testing for continuous (Gaussian) data via
+// partial correlation and Fisher's z-transformation; see pCorTest.cpp for
+// documentation of each function.
 #ifndef PCORTEST_H
 #define PCORTEST_H
 

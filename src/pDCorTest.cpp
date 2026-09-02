@@ -1,5 +1,18 @@
+// Conditional independence testing for discrete data via the G2
+// (likelihood-ratio chi-squared) statistic.
 #include "pDCorTest.h"
 
+//' Encode each row of a discrete conditioning set as a single joint level
+//'
+//' @param sep_vectors A matrix whose columns are the discrete levels of each
+//'   variable in a conditioning set, one row per observation.
+//' @return A numeric vector with one entry per row of `sep_vectors`, giving
+//'   a base-10 encoding of that row's combination of levels (treating each
+//'   column as a base-10 "digit"). Two rows get the same value if and only
+//'   if they have the same combination of levels, so this is used to
+//'   enumerate the distinct joint strata of a (possibly multivariate)
+//'   conditioning set.
+//' @noRd
 // [[Rcpp::export]]
 arma::vec matrix_to_string(arma::mat sep_vectors) {
   int row_n = sep_vectors.n_rows;
@@ -16,6 +29,18 @@ arma::vec matrix_to_string(arma::mat sep_vectors) {
   return con_string;
 }
 
+//' G2 statistic for association between two discrete variables in one stratum
+//'
+//' @param A,B Numeric vectors of discrete levels for the two variables being
+//'   tested, restricted to a single stratum of the conditioning set.
+//' @param tot_Au_size,tot_Bu_size Total number of possible levels for `A`
+//'   and `B` across *all* strata (not just this one), so the contingency
+//'   table dimensions are consistent when summed across strata by
+//'   `get_G2_all()`.
+//' @return The G2 (likelihood-ratio chi-squared) statistic for `A` and `B`
+//'   within this stratum, computed as twice the sum over observed cells of
+//'   `observed * log(observed / expected)`, with zero-count cells skipped.
+//' @noRd
 // [[Rcpp::export]]
 double get_G2_one(arma::vec A, arma::vec B, int tot_Au_size, int tot_Bu_size) {
   // Contingency Table
@@ -59,6 +84,17 @@ double get_G2_one(arma::vec A, arma::vec B, int tot_Au_size, int tot_Bu_size) {
   return 2 * G2;
 }
 
+//' G2 statistic for association between two discrete variables given a
+//' conditioning set
+//'
+//' @param A,B Numeric vectors of discrete levels for the two variables being
+//'   tested.
+//' @param S Numeric vector giving the joint level of the conditioning set
+//'   for each observation, as produced by `matrix_to_string()`.
+//' @return The G2 statistic for `A` and `B` given `S`, computed as the sum
+//'   of the per-stratum G2 statistics (see `get_G2_one()`) over each
+//'   distinct level of `S`.
+//' @noRd
 // [[Rcpp::export]]
 double get_G2_all(arma::vec A, arma::vec B, arma::vec S) {
   arma::vec A_uniq = unique(A);
@@ -91,6 +127,20 @@ double get_G2_all(arma::vec A, arma::vec B, arma::vec S) {
   return G_stat;
 }
 
+//' Conditional independence test for discrete data via the G2 statistic
+//'
+//' @param df Data matrix of discrete (integer-coded) variables, one column
+//'   per variable and one row per observation.
+//' @param i,j 0-based column indices into `df` of the two variables being
+//'   tested.
+//' @param k 0-based column indices into `df` of the conditioning set.
+//' @param signif_level Significance level of the test.
+//' @return A list with `result` (`TRUE` if the null of conditional
+//'   independence is not rejected), `statistic` (the G2 statistic from
+//'   `get_G2_all()`), and `pval` (the corresponding upper-tail chi-squared
+//'   p-value, using the degrees of freedom implied by the number of levels
+//'   of `A`, `B`, and the conditioning set).
+//' @noRd
 // [[Rcpp::export]]
 List condInttestdis(arma::mat df, const size_t &i, const size_t &j,
                     const arma::uvec &k, const double &signif_level) {
@@ -102,6 +152,10 @@ List condInttestdis(arma::mat df, const size_t &i, const size_t &j,
   arma::mat S_m(df.n_rows, k_size);
 
   arma::vec A_u = unique(A);
+  // NOTE: this should likely be unique(B) -- as written, B_u is derived
+  // from A, which makes the `dof` calculation below wrong whenever A and B
+  // have different numbers of levels. Ported as-is from the original CML
+  // implementation; flagged here rather than silently changed.
   arma::vec B_u = unique(A);
 
   int S_df = 1;

@@ -1,3 +1,5 @@
+// Small utility functions shared across lslearn's structure-learning
+// algorithms; see SharedFunctions.cpp for documentation of each function.
 #ifndef SHAREDFUNCTIONS_H
 #define SHAREDFUNCTIONS_H
 

@@ -1,3 +1,6 @@
+// Conditional independence testing for discrete data via the G2
+// (likelihood-ratio chi-squared) statistic; see pDCorTest.cpp for
+// documentation of each function.
 #ifndef PDCORTEST_H
 #define PDCORTEST_H
 
