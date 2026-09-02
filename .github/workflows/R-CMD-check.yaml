@@ -10,7 +10,21 @@ name: R-CMD-check.yaml
 permissions: read-all
 
 jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      config: ${{ steps.set-matrix.outputs.config }}
+    steps:
+      - id: set-matrix
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo 'config=[{"os":"macos-latest","r":"release"},{"os":"windows-latest","r":"release"},{"os":"ubuntu-latest","r":"devel","http-user-agent":"release"},{"os":"ubuntu-latest","r":"release"},{"os":"ubuntu-latest","r":"oldrel-1"}]' >> "$GITHUB_OUTPUT"
+          else
+            echo 'config=[{"os":"ubuntu-latest","r":"release"}]' >> "$GITHUB_OUTPUT"
+          fi
+
   R-CMD-check:
+    needs: set-matrix
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -18,12 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - {os: macos-latest,   r: 'release'}
-          - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
+        config: ${{ fromJSON(needs.set-matrix.outputs.config) }}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -38,6 +47,7 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
+          use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
