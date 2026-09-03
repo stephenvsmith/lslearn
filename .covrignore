@@ -3,3 +3,4 @@ R/RcppExports.R
 src/test-runner.cpp
 src/test-misc.cpp
 src/test-cond-ind-test.cpp
+src/test-sep-set-list.cpp

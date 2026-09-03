@@ -307,6 +307,131 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// printS
+void printS(NumericVector neighbors);
+RcppExport SEXP _lslearn_printS(SEXP neighborsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type neighbors(neighborsSEXP);
+    printS(neighbors);
+    return R_NilValue;
+END_RCPP
+}
+// getInitialValues
+NumericVector getInitialValues(NumericVector neighbors, int i, int j);
+RcppExport SEXP _lslearn_getInitialValues(SEXP neighborsSEXP, SEXP iSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type neighbors(neighborsSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(getInitialValues(neighbors, i, j));
+    return rcpp_result_gen;
+END_RCPP
+}
+// setListEmptySet
+NumericVector setListEmptySet(NumericVector neighbors, int i, int j);
+RcppExport SEXP _lslearn_setListEmptySet(SEXP neighborsSEXP, SEXP iSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type neighbors(neighborsSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(setListEmptySet(neighbors, i, j));
+    return rcpp_result_gen;
+END_RCPP
+}
+// setListEfficient
+NumericVector setListEfficient(NumericVector neighbors, int i, int j, NumericVector kvals);
+RcppExport SEXP _lslearn_setListEfficient(SEXP neighborsSEXP, SEXP iSEXP, SEXP jSEXP, SEXP kvalsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type neighbors(neighborsSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type kvals(kvalsSEXP);
+    rcpp_result_gen = Rcpp::wrap(setListEfficient(neighbors, i, j, kvals));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkSeparationFunc
+bool checkSeparationFunc(NumericVector neighbors, int i, int j, NumericVector sep, int val_to_check);
+RcppExport SEXP _lslearn_checkSeparationFunc(SEXP neighborsSEXP, SEXP iSEXP, SEXP jSEXP, SEXP sepSEXP, SEXP val_to_checkSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type neighbors(neighborsSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type sep(sepSEXP);
+    Rcpp::traits::input_parameter< int >::type val_to_check(val_to_checkSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkSeparationFunc(neighbors, i, j, sep, val_to_check));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkSeparationFuncCorrected
+bool checkSeparationFuncCorrected(NumericVector neighbors, int i, int j, NumericVector sep, int val_to_check);
+RcppExport SEXP _lslearn_checkSeparationFuncCorrected(SEXP neighborsSEXP, SEXP iSEXP, SEXP jSEXP, SEXP sepSEXP, SEXP val_to_checkSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type neighbors(neighborsSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type sep(sepSEXP);
+    Rcpp::traits::input_parameter< int >::type val_to_check(val_to_checkSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkSeparationFuncCorrected(neighbors, i, j, sep, val_to_check));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkIsSepSetMember
+bool checkIsSepSetMember(NumericVector neighbors, size_t i, size_t j, NumericVector sep1, NumericVector sep2, size_t val_to_check);
+RcppExport SEXP _lslearn_checkIsSepSetMember(SEXP neighborsSEXP, SEXP iSEXP, SEXP jSEXP, SEXP sep1SEXP, SEXP sep2SEXP, SEXP val_to_checkSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type neighbors(neighborsSEXP);
+    Rcpp::traits::input_parameter< size_t >::type i(iSEXP);
+    Rcpp::traits::input_parameter< size_t >::type j(jSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type sep1(sep1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type sep2(sep2SEXP);
+    Rcpp::traits::input_parameter< size_t >::type val_to_check(val_to_checkSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkIsSepSetMember(neighbors, i, j, sep1, sep2, val_to_check));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkPotentialVStruct
+bool checkPotentialVStruct(NumericVector neighbors, size_t i, size_t j, NumericVector sep, size_t k);
+RcppExport SEXP _lslearn_checkPotentialVStruct(SEXP neighborsSEXP, SEXP iSEXP, SEXP jSEXP, SEXP sepSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type neighbors(neighborsSEXP);
+    Rcpp::traits::input_parameter< size_t >::type i(iSEXP);
+    Rcpp::traits::input_parameter< size_t >::type j(jSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type sep(sepSEXP);
+    Rcpp::traits::input_parameter< size_t >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkPotentialVStruct(neighbors, i, j, sep, k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkGetS
+List checkGetS(NumericVector neighbors, size_t i, size_t j, NumericVector sep);
+RcppExport SEXP _lslearn_checkGetS(SEXP neighborsSEXP, SEXP iSEXP, SEXP jSEXP, SEXP sepSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type neighbors(neighborsSEXP);
+    Rcpp::traits::input_parameter< size_t >::type i(iSEXP);
+    Rcpp::traits::input_parameter< size_t >::type j(jSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type sep(sepSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkGetS(neighbors, i, j, sep));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 RcppExport SEXP run_testthat_tests(SEXP);
 
@@ -335,6 +460,15 @@ static const R_CallMethodDef CallEntries[] = {
     {"_lslearn_test_subset_mat", (DL_FUNC) &_lslearn_test_subset_mat, 2},
     {"_lslearn_test_NumMat_value", (DL_FUNC) &_lslearn_test_NumMat_value, 1},
     {"_lslearn_test_decrement_matrix", (DL_FUNC) &_lslearn_test_decrement_matrix, 1},
+    {"_lslearn_printS", (DL_FUNC) &_lslearn_printS, 1},
+    {"_lslearn_getInitialValues", (DL_FUNC) &_lslearn_getInitialValues, 3},
+    {"_lslearn_setListEmptySet", (DL_FUNC) &_lslearn_setListEmptySet, 3},
+    {"_lslearn_setListEfficient", (DL_FUNC) &_lslearn_setListEfficient, 4},
+    {"_lslearn_checkSeparationFunc", (DL_FUNC) &_lslearn_checkSeparationFunc, 5},
+    {"_lslearn_checkSeparationFuncCorrected", (DL_FUNC) &_lslearn_checkSeparationFuncCorrected, 5},
+    {"_lslearn_checkIsSepSetMember", (DL_FUNC) &_lslearn_checkIsSepSetMember, 6},
+    {"_lslearn_checkPotentialVStruct", (DL_FUNC) &_lslearn_checkPotentialVStruct, 5},
+    {"_lslearn_checkGetS", (DL_FUNC) &_lslearn_checkGetS, 4},
     {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
     {NULL, NULL, 0}
 };

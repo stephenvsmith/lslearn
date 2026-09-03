@@ -214,3 +214,39 @@ test_decrement_matrix <- function(G) {
     invisible(.Call(`_lslearn_test_decrement_matrix`, G))
 }
 
+printS <- function(neighbors) {
+    invisible(.Call(`_lslearn_printS`, neighbors))
+}
+
+getInitialValues <- function(neighbors, i, j) {
+    .Call(`_lslearn_getInitialValues`, neighbors, i, j)
+}
+
+setListEmptySet <- function(neighbors, i, j) {
+    .Call(`_lslearn_setListEmptySet`, neighbors, i, j)
+}
+
+setListEfficient <- function(neighbors, i, j, kvals) {
+    .Call(`_lslearn_setListEfficient`, neighbors, i, j, kvals)
+}
+
+checkSeparationFunc <- function(neighbors, i, j, sep, val_to_check) {
+    .Call(`_lslearn_checkSeparationFunc`, neighbors, i, j, sep, val_to_check)
+}
+
+checkSeparationFuncCorrected <- function(neighbors, i, j, sep, val_to_check) {
+    .Call(`_lslearn_checkSeparationFuncCorrected`, neighbors, i, j, sep, val_to_check)
+}
+
+checkIsSepSetMember <- function(neighbors, i, j, sep1, sep2, val_to_check) {
+    .Call(`_lslearn_checkIsSepSetMember`, neighbors, i, j, sep1, sep2, val_to_check)
+}
+
+checkPotentialVStruct <- function(neighbors, i, j, sep, k) {
+    .Call(`_lslearn_checkPotentialVStruct`, neighbors, i, j, sep, k)
+}
+
+checkGetS <- function(neighbors, i, j, sep) {
+    .Call(`_lslearn_checkGetS`, neighbors, i, j, sep)
+}
+
