@@ -20,6 +20,19 @@ public:
     }
   }
 
+  // Validates that a double (e.g. an element of an R-facing NumericVector of
+  // targets) is a finite, non-negative whole number and in range, then
+  // returns it cast to size_t. Prevents silent truncation of fractional
+  // values and mishandling of NA/NaN when indices arrive as doubles.
+  size_t validateAndCast(double val) const {
+    if (!R_finite(val) || val != std::floor(val) || val < 0) {
+      stop("Invalid index: must be a non-negative whole number");
+    }
+    size_t ind = static_cast<size_t>(val);
+    validateIndex(ind);
+    return ind;
+  }
+
   void validateAdjMatrix(const NumericMatrix adj) { // tested
     if (adj.nrow() != adj.ncol()) {
       stop("Dimensions of adjacency matrix do not match.");
@@ -27,7 +40,7 @@ public:
   }
 
   // Accessors
-  int size() { return m_p; }                         // not tested
+  size_t size() { return m_p; }                      // not tested
   StringVector getNodeNames() { return m_names; }    // tested
   NumericMatrix getAmat() { return amat; }           // tested
   int getAmatVal(const size_t &i, const size_t &j) { // tested
@@ -61,10 +74,12 @@ public:
   void setNames(StringVector n) { m_names = n; }
   void setAmat(NumericMatrix m) { // tested
     validateAdjMatrix(m);
-    amat = m;
+    amat = clone(m);
     m_p = m.ncol();
   }
   double &operator()(const size_t &i, const size_t &j) { // tested
+    validateIndex(i);
+    validateIndex(j);
     return amat(i, j);
   }
   void setAmatVal(const size_t &i, const size_t &j,
