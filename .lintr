@@ -1,1 +1,10 @@
 exclusions: list("R/RcppExports.R")
+linters: linters_with_defaults(
+    # The pre-commit lintr hook runs in an isolated R environment that only
+    # has Rcpp installed (not bnlearn/MXM/RcppArmadillo/testthat), so it can
+    # never resolve calls to functions defined elsewhere in this package
+    # (in-package R helpers, Rcpp::export'd C++ functions). Installing those
+    # dependencies into that isolated environment would reintroduce the slow
+    # from-source builds (Rfast/Rfast2 via MXM) removed for CI time.
+    object_usage_linter = NULL
+  )
