@@ -11,6 +11,13 @@
 #'   representing the (single) empty combination.
 #' @details
 #' Tested: 12/16/20. Confirmed: 11/23/22.
+#'
+#' `l` is taken as a signed `int` (rather than `size_t`) specifically so a
+#' negative value can be rejected explicitly here: converting a negative
+#' double straight to `size_t` at the Rcpp boundary is implementation- and
+#' version-defined (it has been observed to both wrap around to a huge
+#' positive value and to clamp to 0 across different Rcpp/compiler
+#' versions), so it isn't a reliable way to reject bad input.
 #' @noRd
 combn_cpp <- function(x, l) {
     .Call(`_lslearn_combn_cpp`, x, l)
