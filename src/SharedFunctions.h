@@ -8,7 +8,7 @@
 
 using namespace Rcpp;
 
-NumericMatrix combn_cpp(NumericVector x, size_t l); // tested
+NumericMatrix combn_cpp(NumericVector x, int l); // tested
 
 void printVecElements(NumericVector v, StringVector names, String opening = "",
                       String closing = "");
