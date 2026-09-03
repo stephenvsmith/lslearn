@@ -5,3 +5,4 @@ src/test-misc.cpp
 src/test-cond-ind-test.cpp
 src/test-graph.cpp
 src/test-sep-set-list.cpp
+src/test-mb-list.cpp

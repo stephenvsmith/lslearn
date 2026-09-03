@@ -286,6 +286,30 @@ checkNeighborhoodId <- function(nodes, node_names, adj, i, verbose = FALSE) {
     .Call(`_lslearn_checkNeighborhoodId`, nodes, node_names, adj, i, verbose)
 }
 
+testInitializeMBList <- function(nodes, mb_mat) {
+    invisible(.Call(`_lslearn_testInitializeMBList`, nodes, mb_mat))
+}
+
+testInitializeMBListPop <- function(nodes, amat) {
+    invisible(.Call(`_lslearn_testInitializeMBListPop`, nodes, amat))
+}
+
+testAccessMB <- function(nodes, mb_mat, i) {
+    .Call(`_lslearn_testAccessMB`, nodes, mb_mat, i)
+}
+
+testAccessMultipleMB <- function(nodes, mb_mat, v, include_targets = FALSE, exclude_targets = FALSE, verbose = FALSE) {
+    .Call(`_lslearn_testAccessMultipleMB`, nodes, mb_mat, v, include_targets, exclude_targets, verbose)
+}
+
+testIsMBMember <- function(nodes, mb_mat, target, i) {
+    .Call(`_lslearn_testIsMBMember`, nodes, mb_mat, target, i)
+}
+
+testSilencer <- function(nodes, mb_mat, target, i) {
+    invisible(.Call(`_lslearn_testSilencer`, nodes, mb_mat, target, i))
+}
+
 test_union <- function(x, y) {
     .Call(`_lslearn_test_union`, x, y)
 }

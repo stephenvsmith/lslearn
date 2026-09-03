@@ -592,6 +592,84 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// testInitializeMBList
+void testInitializeMBList(NumericVector nodes, NumericMatrix mb_mat);
+RcppExport SEXP _lslearn_testInitializeMBList(SEXP nodesSEXP, SEXP mb_matSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type mb_mat(mb_matSEXP);
+    testInitializeMBList(nodes, mb_mat);
+    return R_NilValue;
+END_RCPP
+}
+// testInitializeMBListPop
+void testInitializeMBListPop(NumericVector nodes, NumericMatrix amat);
+RcppExport SEXP _lslearn_testInitializeMBListPop(SEXP nodesSEXP, SEXP amatSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type amat(amatSEXP);
+    testInitializeMBListPop(nodes, amat);
+    return R_NilValue;
+END_RCPP
+}
+// testAccessMB
+NumericVector testAccessMB(NumericVector nodes, NumericMatrix mb_mat, size_t i);
+RcppExport SEXP _lslearn_testAccessMB(SEXP nodesSEXP, SEXP mb_matSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type mb_mat(mb_matSEXP);
+    Rcpp::traits::input_parameter< size_t >::type i(iSEXP);
+    rcpp_result_gen = Rcpp::wrap(testAccessMB(nodes, mb_mat, i));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testAccessMultipleMB
+NumericVector testAccessMultipleMB(NumericVector nodes, NumericMatrix mb_mat, NumericVector v, bool include_targets, bool exclude_targets, bool verbose);
+RcppExport SEXP _lslearn_testAccessMultipleMB(SEXP nodesSEXP, SEXP mb_matSEXP, SEXP vSEXP, SEXP include_targetsSEXP, SEXP exclude_targetsSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type mb_mat(mb_matSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type v(vSEXP);
+    Rcpp::traits::input_parameter< bool >::type include_targets(include_targetsSEXP);
+    Rcpp::traits::input_parameter< bool >::type exclude_targets(exclude_targetsSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(testAccessMultipleMB(nodes, mb_mat, v, include_targets, exclude_targets, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testIsMBMember
+bool testIsMBMember(NumericVector nodes, NumericMatrix mb_mat, size_t target, size_t i);
+RcppExport SEXP _lslearn_testIsMBMember(SEXP nodesSEXP, SEXP mb_matSEXP, SEXP targetSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type mb_mat(mb_matSEXP);
+    Rcpp::traits::input_parameter< size_t >::type target(targetSEXP);
+    Rcpp::traits::input_parameter< size_t >::type i(iSEXP);
+    rcpp_result_gen = Rcpp::wrap(testIsMBMember(nodes, mb_mat, target, i));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testSilencer
+void testSilencer(NumericVector nodes, NumericMatrix mb_mat, double target, double i);
+RcppExport SEXP _lslearn_testSilencer(SEXP nodesSEXP, SEXP mb_matSEXP, SEXP targetSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type mb_mat(mb_matSEXP);
+    Rcpp::traits::input_parameter< double >::type target(targetSEXP);
+    Rcpp::traits::input_parameter< double >::type i(iSEXP);
+    testSilencer(nodes, mb_mat, target, i);
+    return R_NilValue;
+END_RCPP
+}
 // test_union
 NumericVector test_union(NumericVector x, NumericVector y);
 RcppExport SEXP _lslearn_test_union(SEXP xSEXP, SEXP ySEXP) {
@@ -914,6 +992,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_lslearn_check_upd_path", (DL_FUNC) &_lslearn_check_upd_path, 6},
     {"_lslearn_test_checkWronglyCovered", (DL_FUNC) &_lslearn_test_checkWronglyCovered, 4},
     {"_lslearn_checkNeighborhoodId", (DL_FUNC) &_lslearn_checkNeighborhoodId, 5},
+    {"_lslearn_testInitializeMBList", (DL_FUNC) &_lslearn_testInitializeMBList, 2},
+    {"_lslearn_testInitializeMBListPop", (DL_FUNC) &_lslearn_testInitializeMBListPop, 2},
+    {"_lslearn_testAccessMB", (DL_FUNC) &_lslearn_testAccessMB, 3},
+    {"_lslearn_testAccessMultipleMB", (DL_FUNC) &_lslearn_testAccessMultipleMB, 6},
+    {"_lslearn_testIsMBMember", (DL_FUNC) &_lslearn_testIsMBMember, 4},
+    {"_lslearn_testSilencer", (DL_FUNC) &_lslearn_testSilencer, 4},
     {"_lslearn_test_union", (DL_FUNC) &_lslearn_test_union, 2},
     {"_lslearn_test_sort", (DL_FUNC) &_lslearn_test_sort, 1},
     {"_lslearn_test_fill", (DL_FUNC) &_lslearn_test_fill, 3},
