@@ -163,11 +163,11 @@ NumericVector DAG::getNeighborsMultiTargets(const NumericVector &targets,
   NumericVector neighbors;
 
   for (auto t : targets) {
-    validateIndex(t);
+    size_t target = validateAndCast(t);
     if (verbose) {
-      Rcout << "Target: " << t << std::endl;
+      Rcout << "Target: " << target << std::endl;
     }
-    neighbors = union_(neighbors, getNeighbors(t, verbose));
+    neighbors = union_(neighbors, getNeighbors(target, verbose));
   }
 
   // Remove target nodes from final vector
