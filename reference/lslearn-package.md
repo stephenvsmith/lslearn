@@ -19,3 +19,7 @@ Useful links:
 ## Author
 
 **Maintainer**: Stephen Smith <stephensmith13424@gmail.com>
+
+Authors:
+
+- Stephen Smith <stephensmith13424@gmail.com>
