@@ -8,3 +8,5 @@ src/test-graph.cpp
 src/test-mb-list.cpp
 src/test-constrained-algo.cpp
 src/test-snl.cpp
+src/test-cml.cpp
+src/test-rules.cpp

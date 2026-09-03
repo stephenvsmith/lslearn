@@ -1,6 +1,6 @@
-// Public C++ entry points backing lslearn's user-facing R wrappers
-// (currently just snl(); cml()'s sampleCML()/popCML() will be added here
-// once the CML class is ported).
+// Public C++ entry points backing lslearn's user-facing R wrappers (snl()
+// and cml()).
+#include "CML.h"
 #include "SNL.h"
 #include <chrono>
 
@@ -93,5 +93,178 @@ List popSNL(NumericMatrix true_dag, NumericVector targets,
                       _["allNodes"] = snl.getNeighborhood(),
                       _["rulesUsed"] = snl.getRulesUsed(),
                       _["targetSkeletonTimes"] = snl.getTargetSkeletonTimes(),
+                      _["totalTime"] = total_time);
+}
+
+//' Run the sample (or semi-sample) version of CML and collect its results
+//'
+//' Internal building block for `cml()`; end users should call `cml()`
+//' rather than this function directly.
+//'
+//' @inheritParams sampleSNL
+//' @returns A list with the estimated graph (`G`), separating sets (`S`),
+//'   test counts, node ordering, orientation rule usage, skeleton timing,
+//'   and total timing information; see `cml()` for the user-facing result
+//'   shape.
+//' @noRd
+// [[Rcpp::export]]
+List sampleCML(NumericMatrix true_dag, arma::mat df, NumericVector targets,
+               NumericVector nodes_interest, StringVector names, int lmax = 3,
+               double signif_level = 0.01, bool verbose = true,
+               std::string test = "testIndFisher", bool estDAG = false) {
+  // Variable to keep track of timing
+  auto start = high_resolution_clock::now();
+
+  // Instantiate the Local FCI object
+  CML cml(true_dag, df, targets, nodes_interest, names, lmax, signif_level,
+          verbose, test, estDAG);
+
+  cml.run();
+
+  auto end = high_resolution_clock::now();
+  auto duration = duration_cast<microseconds>(end - start);
+  double total_time = duration.count() / 1e6; // Get time in seconds
+
+  // Ensure we have proper notation for every edge
+  cml.checkNotation();
+
+  return List::create(_["G"] = cml.getAmat(), _["S"] = cml.getSepSetList(),
+                      _["NumTests"] = cml.getNumTests(),
+                      _["RulesUsed"] = cml.getRulesCount(),
+                      _["allNodes"] = cml.getNeighborhood(),
+                      _["totalSkeletonTime"] = cml.getTotalSkeletonTime(),
+                      _["targetSkeletonTimes"] = cml.getTargetSkeletonTimes(),
+                      _["algorithmTotalTime"] = cml.getTotalTime(),
+                      _["totalTime"] = total_time);
+}
+
+//' Run the population (oracle) version of CML and collect its results
+//'
+//' Internal building block for `cml()`; end users should call `cml()`
+//' rather than this function directly.
+//'
+//' @inheritParams sampleSNL
+//' @returns Same shape as `sampleCML()`, minus the sample-only
+//'   `algorithmTotalTime` entry.
+//' @noRd
+// [[Rcpp::export]]
+List popCML(NumericMatrix true_dag, NumericVector targets,
+            NumericVector nodes_interest, StringVector names, int lmax = 3,
+            bool verbose = true) {
+  // Variable to keep track of timing
+  auto start = high_resolution_clock::now();
+
+  // Instantiate the Local FCI object
+  CML cml(true_dag, targets, nodes_interest, names, lmax, verbose);
+
+  if (verbose) {
+    Rcout << "Beginning algorithm over all neighborhoods.\n";
+  }
+
+  cml.run();
+
+  auto end = high_resolution_clock::now();
+  auto duration = duration_cast<microseconds>(end - start);
+  double total_time = duration.count() / 1e6;
+  total_time /= 60; // Get time in minutes
+
+  // Ensure we have proper notation for every edge
+  cml.checkNotation();
+
+  return List::create(_["G"] = cml.getAmat(), _["S"] = cml.getSepSetList(),
+                      _["NumTests"] = cml.getNumTests(),
+                      _["RulesUsed"] = cml.getRulesCount(),
+                      _["allNodes"] = cml.getNeighborhood(),
+                      _["totalSkeletonTime"] = cml.getTotalSkeletonTime(),
+                      _["targetSkeletonTimes"] = cml.getTargetSkeletonTimes(),
+                      _["totalTime"] = total_time);
+}
+
+//' Run the sample (or semi-sample) MAG-only version of CML and collect its
+//' results
+//'
+//' Internal building block for `cml_mag()`; end users should call
+//' `cml_mag()` rather than this function directly. Identical to
+//' `sampleCML()` except it calls `CML::run_mag()`, which skips the
+//' within-neighborhood mixed-graph conversion rules
+//' (`CML::convertMixedGraph()`), leaving the result as an ancestral
+//' (MAG-style) graph rather than converting it to the CML-specific
+//' neighborhood notation.
+//'
+//' @inheritParams sampleSNL
+//' @returns Same shape as `sampleCML()`.
+//' @noRd
+// [[Rcpp::export]]
+List sampleCML_mag(NumericMatrix true_dag, arma::mat df, NumericVector targets,
+                   NumericVector nodes_interest, StringVector names,
+                   int lmax = 3, double signif_level = 0.01,
+                   bool verbose = true, std::string test = "testIndFisher",
+                   bool estDAG = false) {
+  // Variable to keep track of timing
+  auto start = high_resolution_clock::now();
+
+  // Instantiate the Local FCI object
+  CML cml(true_dag, df, targets, nodes_interest, names, lmax, signif_level,
+          verbose, test, estDAG);
+
+  cml.run_mag();
+
+  auto end = high_resolution_clock::now();
+  auto duration = duration_cast<microseconds>(end - start);
+  double total_time = duration.count() / 1e6; // Get time in seconds
+
+  // Ensure we have proper notation for every edge
+  cml.checkNotation();
+
+  return List::create(_["G"] = cml.getAmat(), _["S"] = cml.getSepSetList(),
+                      _["NumTests"] = cml.getNumTests(),
+                      _["RulesUsed"] = cml.getRulesCount(),
+                      _["allNodes"] = cml.getNeighborhood(),
+                      _["totalSkeletonTime"] = cml.getTotalSkeletonTime(),
+                      _["targetSkeletonTimes"] = cml.getTargetSkeletonTimes(),
+                      _["algorithmTotalTime"] = cml.getTotalTime(),
+                      _["totalTime"] = total_time);
+}
+
+//' Run the population (oracle) MAG-only version of CML and collect its
+//' results
+//'
+//' Internal building block for `cml_mag()`; end users should call
+//' `cml_mag()` rather than this function directly.
+//'
+//' @inheritParams sampleSNL
+//' @returns Same shape as `sampleCML_mag()`, minus the sample-only
+//'   `algorithmTotalTime` entry.
+//' @noRd
+// [[Rcpp::export]]
+List popCML_mag(NumericMatrix true_dag, NumericVector targets,
+                NumericVector nodes_interest, StringVector names, int lmax = 3,
+                bool verbose = true) {
+  // Variable to keep track of timing
+  auto start = high_resolution_clock::now();
+
+  // Instantiate the Local FCI object
+  CML cml(true_dag, targets, nodes_interest, names, lmax, verbose);
+
+  if (verbose) {
+    Rcout << "Beginning algorithm over all neighborhoods.\n";
+  }
+
+  cml.run_mag();
+
+  auto end = high_resolution_clock::now();
+  auto duration = duration_cast<microseconds>(end - start);
+  double total_time = duration.count() / 1e6;
+  total_time /= 60; // Get time in minutes
+
+  // Ensure we have proper notation for every edge
+  cml.checkNotation();
+
+  return List::create(_["G"] = cml.getAmat(), _["S"] = cml.getSepSetList(),
+                      _["NumTests"] = cml.getNumTests(),
+                      _["RulesUsed"] = cml.getRulesCount(),
+                      _["allNodes"] = cml.getNeighborhood(),
+                      _["totalSkeletonTime"] = cml.getTotalSkeletonTime(),
+                      _["targetSkeletonTimes"] = cml.getTargetSkeletonTimes(),
                       _["totalTime"] = total_time);
 }

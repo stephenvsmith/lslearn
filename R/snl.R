@@ -11,23 +11,7 @@
 #' if also supplied, used only for the conditional independence tests
 #' themselves -- the "semi-sample" version).
 #'
-#' @param data A data matrix or data frame, or `NULL` for the population
-#'   (oracle) version.
-#' @param true_dag A 0/1 adjacency matrix of the true DAG, or `NULL` to
-#'   estimate the neighborhoods from `data` instead.
-#' @param targets A vector of 1-based target node indices.
-#' @param node_names Character vector of node names; defaults to `V0`,
-#'   `V1`, ... if not supplied.
-#' @param lmax Maximum size of the conditioning set considered during the
-#'   skeleton search.
-#' @param tol Significance level for the conditional independence tests
-#'   used by the skeleton search.
-#' @param mb_tol Significance level used for Markov Blanket estimation (see
-#'   `get_all_mbs()`); only relevant when `true_dag` is `NULL`.
-#' @param method Markov Blanket estimation algorithm (see `get_mb()`); only
-#'   relevant when `true_dag` is `NULL`.
-#' @param test The conditional independence test to use.
-#' @param verbose Whether to provide detailed output.
+#' @inheritParams cml
 #'
 #' @returns A list with the estimated PDAG adjacency matrix (`amat`),
 #'   separating sets (`S`), the number of conditional independence tests
