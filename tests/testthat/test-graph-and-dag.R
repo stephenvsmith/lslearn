@@ -85,11 +85,10 @@ test_that("Graph constructors, setters and getters", {
     }
   }
 
-  # Check to make sure adj. mat. "setter" works
-  # `adj[, ]` forces an independent copy (unlike plain `<-`): Graph's
-  # non-const operator() below returns a reference straight into the
-  # Rcpp-wrapped matrix, so a C++-side mutation of `tmp` bypasses R's
-  # copy-on-write and would otherwise corrupt `adj` itself.
+  # Check to make sure adj. mat. "setter" works. Graph clones its adjacency
+  # matrix on construction/setAmat, so mutating `tmp` below via the C++
+  # accessors cannot corrupt `adj` even though `tmp` still refers to the same
+  # underlying data as `adj` at this point.
   tmp <- adj[, ]
   adj_test <- adj[, ]
   expect_equal(adj_test, tmp)
@@ -119,6 +118,19 @@ test_that("Graph constructors, setters and getters", {
   # Check DAG constructor (1 arg)
   expect_equal(checkEmptyGraph(10), matrix(0, ncol = 10, nrow = 10))
   expect_output(check_dag_object2(10))
+})
+
+test_that("Graph does not alias the caller's adjacency matrix", {
+  adj <- matrix(c(
+    0, 1,
+    0, 0
+  ), byrow = TRUE, nrow = 2)
+  original <- adj[, ]
+
+  # Mutating through Graph's mutable operator() must not mutate the R object
+  # that was passed in as the adjacency matrix.
+  check_amat_setval(2, letters[1:2], adj, 0, 1, 9)
+  expect_equal(adj, original)
 })
 
 test_that("Test Directed/Undirected", {
@@ -241,6 +253,22 @@ test_that("Check errors", {
   expect_error(check_non_adjacent_solo(p, asia_nodes, asiaDAG, -1))
   expect_error(check_non_adjacent_solo(p, asia_nodes, asiaDAG, p + 1))
   expect_error(check_non_adjacent_solo(p, asia_nodes, asiaDAG, p - 1), NA)
+
+  # Targets for getNeighborsMultiTargets (DAG) must be whole numbers:
+  # a fractional or NA/NaN target must not silently truncate to a valid
+  # index.
+  expect_error(
+    check_neighbors_retrieval_multi(p, asia_nodes, asiaDAG, c(0, 1.5))
+  )
+  expect_error(
+    check_neighbors_retrieval_multi(p, asia_nodes, asiaDAG, c(0, NA_real_))
+  )
+  expect_error(
+    check_neighbors_retrieval_multi(p, asia_nodes, asiaDAG, c(0, NaN))
+  )
+  expect_error(
+    check_neighbors_retrieval_multi(p, asia_nodes, asiaDAG, c(0, 1)), NA
+  )
 })
 
 # Check Adjacency Detection -----------------------------------------------

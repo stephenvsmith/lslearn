@@ -1,13 +1,5 @@
 // A partially directed acyclic graph: neighborhoods (parents, children,
 // undirected neighbors, and spouses) and same-neighborhood queries.
-//
-// NOTE: PDAG.h declares isAncestor(), inherited in name from the CML source
-// this was ported from, but CML never defines PDAG::isAncestor() anywhere
-// (only DAG::isAncestor() exists) and nothing in CML calls it, so the
-// missing definition never surfaces as a link error. Faithfully ported
-// as-is: the declaration is kept (to match the header contract), but calling
-// it would fail to link. Flagging rather than silently adding an
-// implementation or removing the declaration.
 #include "PDAG.h"
 
 PDAG::PDAG(size_t nodes, StringVector node_names, NumericMatrix adj,
@@ -100,11 +92,11 @@ NumericVector PDAG::getNeighborsMultiTargets(const NumericVector &targets,
   NumericVector neighbors;
 
   for (auto t : targets) {
-    validateIndex(t);
+    size_t target = validateAndCast(t);
     if (verbose) {
-      Rcout << "Target: " << t << std::endl;
+      Rcout << "Target: " << target << std::endl;
     }
-    neighbors = union_(neighbors, getNeighbors(t, verbose));
+    neighbors = union_(neighbors, getNeighbors(target, verbose));
   }
 
   // Remove target nodes from final vector
@@ -148,4 +140,15 @@ bool PDAG::inNeighborhood(const size_t &i, const size_t &j) {
     }
   }
   return false;
+}
+
+// PDAG.h declares isAncestor(), inherited in name from the CML source this
+// was ported from, but CML never defines PDAG::isAncestor() anywhere (only
+// DAG::isAncestor() exists) and nothing in CML calls it. Kept as a loud
+// runtime stub rather than removing the declaration, so any future caller
+// gets a clear error instead of an unresolved-symbol link failure.
+bool PDAG::isAncestor(const size_t &desc, const size_t &anc) {
+  validateIndex(desc);
+  validateIndex(anc);
+  stop("PDAG::isAncestor() is not implemented; use DAG::isAncestor() instead.");
 }
