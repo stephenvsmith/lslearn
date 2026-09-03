@@ -64,6 +64,7 @@ void SepSetList::changeList(size_t i, size_t j, NumericVector sep) {
  * neighbors)
  */
 NumericVector SepSetList::getSepSet(size_t i, size_t j) {
+  checkInputValues(i, j, N);
   // Identify separating sets for nodes i and j
   List sublist_i = S[i];
   return sublist_i[j];

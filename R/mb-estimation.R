@@ -11,8 +11,9 @@
 #'   conditional independence tests used in the algorithm
 #' @param lmax Maximum size of the conditioning set considered during
 #'   estimation
-#' @param method The name of the Markov Blanket estimation algorithm to use.
-#'   Valid algorithms include "MMPC", "SES", and "gOMP".
+#' @param method The name of the Markov Blanket estimation algorithm to use:
+#'   "MMPC", "SES", or "pc.sel". "gOMP" and "MMMB" pass validation but are not
+#'   yet implemented and raise an error.
 #' @param test The conditional independence test to use in the algorithm.
 #'   Default is the Fisher Independence test.
 #' @param verbose Whether to provide detailed output
@@ -63,6 +64,8 @@ get_mb <- function(target, dataset, threshold = 0.01, lmax = 3,
     mb_vars <- mb$vars
     n_tests <- sum(mb$n.tests)
     runtime <- mb$runtime[3]
+  } else {
+    stop("MB estimation method '", method, "' is not yet implemented")
   }
 
   if (verbose) {
