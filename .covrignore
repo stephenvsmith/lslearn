@@ -3,8 +3,8 @@ R/RcppExports.R
 src/test-runner.cpp
 src/test-misc.cpp
 src/test-cond-ind-test.cpp
-src/test-sep-set-list.cpp
 src/test-graph.cpp
+src/test-sep-set-list.cpp
 src/test-mb-list.cpp
 src/test-constrained-algo.cpp
 src/test-snl.cpp

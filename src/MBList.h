@@ -28,7 +28,7 @@ public:
   // Obtains the MB for node i
   NumericVector getMB(size_t i) { // tested
     if (mb_list.count(i) == 0) {
-      stop("%i is not an element of the map.\n", i);
+      stop("%zu is not an element of the map.\n", i);
     }
     return mb_list.find(i)->second;
   }
