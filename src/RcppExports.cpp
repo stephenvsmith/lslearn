@@ -156,6 +156,442 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// check_amat_works
+NumericMatrix check_amat_works(int nodes, StringVector node_names, NumericMatrix adj);
+RcppExport SEXP _lslearn_check_amat_works(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_amat_works(nodes, node_names, adj));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_amat_works_onepar
+NumericMatrix check_amat_works_onepar(int nodes);
+RcppExport SEXP _lslearn_check_amat_works_onepar(SEXP nodesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_amat_works_onepar(nodes));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_names_works
+StringVector check_names_works(int nodes, StringVector node_names, NumericMatrix adj);
+RcppExport SEXP _lslearn_check_names_works(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_names_works(nodes, node_names, adj));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_dag_object
+List check_dag_object(int nodes, StringVector node_names, NumericMatrix adj, bool v);
+RcppExport SEXP _lslearn_check_dag_object(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< bool >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_dag_object(nodes, node_names, adj, v));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_pdag_object
+List check_pdag_object(int nodes, StringVector node_names, NumericMatrix adj, bool v);
+RcppExport SEXP _lslearn_check_pdag_object(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< bool >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_pdag_object(nodes, node_names, adj, v));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_dag_object2
+void check_dag_object2(int nodes);
+RcppExport SEXP _lslearn_check_dag_object2(SEXP nodesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    check_dag_object2(nodes);
+    return R_NilValue;
+END_RCPP
+}
+// check_pdag_object2
+void check_pdag_object2(int nodes);
+RcppExport SEXP _lslearn_check_pdag_object2(SEXP nodesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    check_pdag_object2(nodes);
+    return R_NilValue;
+END_RCPP
+}
+// check_neighbors_retrieval
+NumericVector check_neighbors_retrieval(int nodes, StringVector node_names, NumericMatrix adj, int t, bool v);
+RcppExport SEXP _lslearn_check_neighbors_retrieval(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP tSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type t(tSEXP);
+    Rcpp::traits::input_parameter< bool >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_neighbors_retrieval(nodes, node_names, adj, t, v));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_neighbors_retrieval_multi
+NumericVector check_neighbors_retrieval_multi(int nodes, StringVector node_names, NumericMatrix adj, NumericVector t, bool v);
+RcppExport SEXP _lslearn_check_neighbors_retrieval_multi(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP tSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< bool >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_neighbors_retrieval_multi(nodes, node_names, adj, t, v));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_pdag_neighbors_retrieval
+NumericVector check_pdag_neighbors_retrieval(int nodes, StringVector node_names, NumericMatrix adj, int t, bool v);
+RcppExport SEXP _lslearn_check_pdag_neighbors_retrieval(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP tSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type t(tSEXP);
+    Rcpp::traits::input_parameter< bool >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_pdag_neighbors_retrieval(nodes, node_names, adj, t, v));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_amat_retrieval
+int check_amat_retrieval(int nodes, StringVector node_names, NumericMatrix adj, int i, int j);
+RcppExport SEXP _lslearn_check_amat_retrieval(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_amat_retrieval(nodes, node_names, adj, i, j));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_amat_retrieval_function
+int check_amat_retrieval_function(int nodes, StringVector node_names, NumericMatrix adj, int i, int j);
+RcppExport SEXP _lslearn_check_amat_retrieval_function(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_amat_retrieval_function(nodes, node_names, adj, i, j));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_amat_row_retrieval
+NumericVector check_amat_row_retrieval(int nodes, StringVector node_names, NumericMatrix adj, int i);
+RcppExport SEXP _lslearn_check_amat_row_retrieval(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_amat_row_retrieval(nodes, node_names, adj, i));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_amat_col_retrieval
+NumericVector check_amat_col_retrieval(int nodes, StringVector node_names, NumericMatrix adj, int j);
+RcppExport SEXP _lslearn_check_amat_col_retrieval(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_amat_col_retrieval(nodes, node_names, adj, j));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_adjacent_non_adjacent
+List check_adjacent_non_adjacent(int nodes, StringVector node_names, NumericMatrix adj, int i);
+RcppExport SEXP _lslearn_check_adjacent_non_adjacent(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_adjacent_non_adjacent(nodes, node_names, adj, i));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_non_adjacent_solo
+NumericVector check_non_adjacent_solo(int nodes, StringVector node_names, NumericMatrix adj, int i);
+RcppExport SEXP _lslearn_check_non_adjacent_solo(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_non_adjacent_solo(nodes, node_names, adj, i));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_directed_undirected
+List check_directed_undirected(int nodes, StringVector node_names, NumericMatrix adj, int i, int j);
+RcppExport SEXP _lslearn_check_directed_undirected(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_directed_undirected(nodes, node_names, adj, i, j));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_sizes
+List check_sizes(int nodes, StringVector node_names, NumericMatrix adj);
+RcppExport SEXP _lslearn_check_sizes(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_sizes(nodes, node_names, adj));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_amat_setval
+int check_amat_setval(int nodes, StringVector node_names, NumericMatrix adj, int i, int j, int val);
+RcppExport SEXP _lslearn_check_amat_setval(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP, SEXP jSEXP, SEXP valSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< int >::type val(valSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_amat_setval(nodes, node_names, adj, i, j, val));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_amat_setval_function
+int check_amat_setval_function(int nodes, StringVector node_names, NumericMatrix adj, int i, int j, int val);
+RcppExport SEXP _lslearn_check_amat_setval_function(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP, SEXP jSEXP, SEXP valSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< int >::type val(valSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_amat_setval_function(nodes, node_names, adj, i, j, val));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkIfAdjacent
+bool checkIfAdjacent(int nodes, StringVector node_names, NumericMatrix adj, int i, int j);
+RcppExport SEXP _lslearn_checkIfAdjacent(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP, SEXP jSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkIfAdjacent(nodes, node_names, adj, i, j));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkEmptyGraph
+NumericMatrix checkEmptyGraph(int p);
+RcppExport SEXP _lslearn_checkEmptyGraph(SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkEmptyGraph(p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkAcyclicity
+bool checkAcyclicity(int nodes, StringVector node_names, NumericMatrix adj);
+RcppExport SEXP _lslearn_checkAcyclicity(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkAcyclicity(nodes, node_names, adj));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkIsAncestor
+bool checkIsAncestor(int nodes, StringVector node_names, NumericMatrix adj, int desc, int anc, bool verbose);
+RcppExport SEXP _lslearn_checkIsAncestor(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP descSEXP, SEXP ancSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type desc(descSEXP);
+    Rcpp::traits::input_parameter< int >::type anc(ancSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkIsAncestor(nodes, node_names, adj, desc, anc, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkInNeighborhood
+bool checkInNeighborhood(int nodes, StringVector node_names, NumericMatrix adj, int i, int j, bool verbose);
+RcppExport SEXP _lslearn_checkInNeighborhood(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP, SEXP jSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkInNeighborhood(nodes, node_names, adj, i, j, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_pdag_inNeighborhood
+bool check_pdag_inNeighborhood(int nodes, StringVector node_names, NumericMatrix adj, int i, int j, bool verbose);
+RcppExport SEXP _lslearn_check_pdag_inNeighborhood(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP, SEXP jSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_pdag_inNeighborhood(nodes, node_names, adj, i, j, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_set_amat
+NumericMatrix check_set_amat(int nodes, StringVector node_names, NumericMatrix adj);
+RcppExport SEXP _lslearn_check_set_amat(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_set_amat(nodes, node_names, adj));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_disc_path
+NumericVector check_disc_path(int nodes, StringVector node_names, NumericMatrix adj, size_t c, size_t d, size_t e);
+RcppExport SEXP _lslearn_check_disc_path(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP cSEXP, SEXP dSEXP, SEXP eSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< size_t >::type c(cSEXP);
+    Rcpp::traits::input_parameter< size_t >::type d(dSEXP);
+    Rcpp::traits::input_parameter< size_t >::type e(eSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_disc_path(nodes, node_names, adj, c, d, e));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check_upd_path
+NumericVector check_upd_path(int nodes, StringVector node_names, NumericMatrix adj, size_t a, size_t b, size_t e);
+RcppExport SEXP _lslearn_check_upd_path(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP aSEXP, SEXP bSEXP, SEXP eSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< size_t >::type a(aSEXP);
+    Rcpp::traits::input_parameter< size_t >::type b(bSEXP);
+    Rcpp::traits::input_parameter< size_t >::type e(eSEXP);
+    rcpp_result_gen = Rcpp::wrap(check_upd_path(nodes, node_names, adj, a, b, e));
+    return rcpp_result_gen;
+END_RCPP
+}
+// test_checkWronglyCovered
+void test_checkWronglyCovered(int nodes, StringVector node_names, NumericMatrix adj, NumericVector p);
+RcppExport SEXP _lslearn_test_checkWronglyCovered(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    test_checkWronglyCovered(nodes, node_names, adj, p);
+    return R_NilValue;
+END_RCPP
+}
+// checkNeighborhoodId
+List checkNeighborhoodId(int nodes, StringVector node_names, NumericMatrix adj, int i, bool verbose);
+RcppExport SEXP _lslearn_checkNeighborhoodId(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP, SEXP iSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nodes(nodesSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type node_names(node_namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type adj(adjSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkNeighborhoodId(nodes, node_names, adj, i, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
 // test_union
 NumericVector test_union(NumericVector x, NumericVector y);
 RcppExport SEXP _lslearn_test_union(SEXP xSEXP, SEXP ySEXP) {
@@ -322,6 +758,37 @@ static const R_CallMethodDef CallEntries[] = {
     {"_lslearn_get_G2_all", (DL_FUNC) &_lslearn_get_G2_all, 3},
     {"_lslearn_condInttestdis", (DL_FUNC) &_lslearn_condInttestdis, 5},
     {"_lslearn_testArmaCor", (DL_FUNC) &_lslearn_testArmaCor, 1},
+    {"_lslearn_check_amat_works", (DL_FUNC) &_lslearn_check_amat_works, 3},
+    {"_lslearn_check_amat_works_onepar", (DL_FUNC) &_lslearn_check_amat_works_onepar, 1},
+    {"_lslearn_check_names_works", (DL_FUNC) &_lslearn_check_names_works, 3},
+    {"_lslearn_check_dag_object", (DL_FUNC) &_lslearn_check_dag_object, 4},
+    {"_lslearn_check_pdag_object", (DL_FUNC) &_lslearn_check_pdag_object, 4},
+    {"_lslearn_check_dag_object2", (DL_FUNC) &_lslearn_check_dag_object2, 1},
+    {"_lslearn_check_pdag_object2", (DL_FUNC) &_lslearn_check_pdag_object2, 1},
+    {"_lslearn_check_neighbors_retrieval", (DL_FUNC) &_lslearn_check_neighbors_retrieval, 5},
+    {"_lslearn_check_neighbors_retrieval_multi", (DL_FUNC) &_lslearn_check_neighbors_retrieval_multi, 5},
+    {"_lslearn_check_pdag_neighbors_retrieval", (DL_FUNC) &_lslearn_check_pdag_neighbors_retrieval, 5},
+    {"_lslearn_check_amat_retrieval", (DL_FUNC) &_lslearn_check_amat_retrieval, 5},
+    {"_lslearn_check_amat_retrieval_function", (DL_FUNC) &_lslearn_check_amat_retrieval_function, 5},
+    {"_lslearn_check_amat_row_retrieval", (DL_FUNC) &_lslearn_check_amat_row_retrieval, 4},
+    {"_lslearn_check_amat_col_retrieval", (DL_FUNC) &_lslearn_check_amat_col_retrieval, 4},
+    {"_lslearn_check_adjacent_non_adjacent", (DL_FUNC) &_lslearn_check_adjacent_non_adjacent, 4},
+    {"_lslearn_check_non_adjacent_solo", (DL_FUNC) &_lslearn_check_non_adjacent_solo, 4},
+    {"_lslearn_check_directed_undirected", (DL_FUNC) &_lslearn_check_directed_undirected, 5},
+    {"_lslearn_check_sizes", (DL_FUNC) &_lslearn_check_sizes, 3},
+    {"_lslearn_check_amat_setval", (DL_FUNC) &_lslearn_check_amat_setval, 6},
+    {"_lslearn_check_amat_setval_function", (DL_FUNC) &_lslearn_check_amat_setval_function, 6},
+    {"_lslearn_checkIfAdjacent", (DL_FUNC) &_lslearn_checkIfAdjacent, 5},
+    {"_lslearn_checkEmptyGraph", (DL_FUNC) &_lslearn_checkEmptyGraph, 1},
+    {"_lslearn_checkAcyclicity", (DL_FUNC) &_lslearn_checkAcyclicity, 3},
+    {"_lslearn_checkIsAncestor", (DL_FUNC) &_lslearn_checkIsAncestor, 6},
+    {"_lslearn_checkInNeighborhood", (DL_FUNC) &_lslearn_checkInNeighborhood, 6},
+    {"_lslearn_check_pdag_inNeighborhood", (DL_FUNC) &_lslearn_check_pdag_inNeighborhood, 6},
+    {"_lslearn_check_set_amat", (DL_FUNC) &_lslearn_check_set_amat, 3},
+    {"_lslearn_check_disc_path", (DL_FUNC) &_lslearn_check_disc_path, 6},
+    {"_lslearn_check_upd_path", (DL_FUNC) &_lslearn_check_upd_path, 6},
+    {"_lslearn_test_checkWronglyCovered", (DL_FUNC) &_lslearn_test_checkWronglyCovered, 4},
+    {"_lslearn_checkNeighborhoodId", (DL_FUNC) &_lslearn_checkNeighborhoodId, 5},
     {"_lslearn_test_union", (DL_FUNC) &_lslearn_test_union, 2},
     {"_lslearn_test_sort", (DL_FUNC) &_lslearn_test_sort, 1},
     {"_lslearn_test_fill", (DL_FUNC) &_lslearn_test_fill, 3},
