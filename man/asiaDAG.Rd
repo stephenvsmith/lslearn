@@ -19,6 +19,7 @@ data(asiaDAG)
 \description{
 The 0/1 adjacency matrix of the well-known "Asia" (lung cancer) Bayesian
 network (Lauritzen and Spiegelhalter, 1988), an 8-node example network
-used as ground truth in lslearn's Markov Blanket estimation tests.
+used as ground truth in lslearn's graph and Markov Blanket estimation
+tests.
 }
 \keyword{datasets}
