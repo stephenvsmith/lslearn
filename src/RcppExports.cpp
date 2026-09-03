@@ -119,6 +119,144 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// getEdgeNumber
+int getEdgeNumber(NumericMatrix G);
+RcppExport SEXP _lslearn_getEdgeNumber(SEXP GSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type G(GSEXP);
+    rcpp_result_gen = Rcpp::wrap(getEdgeNumber(G));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sharedNeighborhood
+bool sharedNeighborhood(NumericMatrix reference, NumericVector targets, int i, int j, bool verbose);
+RcppExport SEXP _lslearn_sharedNeighborhood(SEXP referenceSEXP, SEXP targetsSEXP, SEXP iSEXP, SEXP jSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type reference(referenceSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(sharedNeighborhood(reference, targets, i, j, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// inTargetNeighborhood
+bool inTargetNeighborhood(NumericMatrix reference, NumericVector targets, int i, bool verbose);
+RcppExport SEXP _lslearn_inTargetNeighborhood(SEXP referenceSEXP, SEXP targetsSEXP, SEXP iSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type reference(referenceSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(inTargetNeighborhood(reference, targets, i, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compareSkeletons
+List compareSkeletons(NumericMatrix est, NumericMatrix truth, bool verbose);
+RcppExport SEXP _lslearn_compareSkeletons(SEXP estSEXP, SEXP truthSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type est(estSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type truth(truthSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(compareSkeletons(est, truth, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compareVStructures
+List compareVStructures(NumericMatrix est, NumericMatrix truth, bool verbose);
+RcppExport SEXP _lslearn_compareVStructures(SEXP estSEXP, SEXP truthSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type est(estSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type truth(truthSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(compareVStructures(est, truth, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// parentRecoveryAccuracy
+List parentRecoveryAccuracy(NumericMatrix est, NumericMatrix truth, NumericVector targets, bool verbose);
+RcppExport SEXP _lslearn_parentRecoveryAccuracy(SEXP estSEXP, SEXP truthSEXP, SEXP targetsSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type est(estSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type truth(truthSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(parentRecoveryAccuracy(est, truth, targets, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// interNeighborhoodEdgeMetrics
+List interNeighborhoodEdgeMetrics(NumericMatrix est, NumericMatrix reference, NumericMatrix true_dag, NumericVector nbhd, bool verbose);
+RcppExport SEXP _lslearn_interNeighborhoodEdgeMetrics(SEXP estSEXP, SEXP referenceSEXP, SEXP true_dagSEXP, SEXP nbhdSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type est(estSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type reference(referenceSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nbhd(nbhdSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(interNeighborhoodEdgeMetrics(est, reference, true_dag, nbhd, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// overallF1
+double overallF1(NumericMatrix est, NumericMatrix ref, NumericVector targets, bool verbose);
+RcppExport SEXP _lslearn_overallF1(SEXP estSEXP, SEXP refSEXP, SEXP targetsSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type est(estSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ref(refSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(overallF1(est, ref, targets, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// allMetrics
+DataFrame allMetrics(NumericMatrix est, NumericMatrix ref_graph, NumericVector targets, NumericMatrix true_dag, NumericVector nbhd, bool verbose, std::string algo, std::string which_nodes);
+RcppExport SEXP _lslearn_allMetrics(SEXP estSEXP, SEXP ref_graphSEXP, SEXP targetsSEXP, SEXP true_dagSEXP, SEXP nbhdSEXP, SEXP verboseSEXP, SEXP algoSEXP, SEXP which_nodesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type est(estSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ref_graph(ref_graphSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nbhd(nbhdSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    Rcpp::traits::input_parameter< std::string >::type algo(algoSEXP);
+    Rcpp::traits::input_parameter< std::string >::type which_nodes(which_nodesSEXP);
+    rcpp_result_gen = Rcpp::wrap(allMetrics(est, ref_graph, targets, true_dag, nbhd, verbose, algo, which_nodes));
+    return rcpp_result_gen;
+END_RCPP
+}
+// getNeighborhoodMetrics
+DataFrame getNeighborhoodMetrics(NumericMatrix G);
+RcppExport SEXP _lslearn_getNeighborhoodMetrics(SEXP GSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type G(GSEXP);
+    rcpp_result_gen = Rcpp::wrap(getNeighborhoodMetrics(G));
+    return rcpp_result_gen;
+END_RCPP
+}
 // validateTargetSNL
 void validateTargetSNL(NumericVector targets, const size_t& t);
 RcppExport SEXP _lslearn_validateTargetSNL(SEXP targetsSEXP, SEXP tSEXP) {
@@ -1765,6 +1903,16 @@ static const R_CallMethodDef CallEntries[] = {
     {"_lslearn_popCML", (DL_FUNC) &_lslearn_popCML, 6},
     {"_lslearn_sampleCML_mag", (DL_FUNC) &_lslearn_sampleCML_mag, 10},
     {"_lslearn_popCML_mag", (DL_FUNC) &_lslearn_popCML_mag, 6},
+    {"_lslearn_getEdgeNumber", (DL_FUNC) &_lslearn_getEdgeNumber, 1},
+    {"_lslearn_sharedNeighborhood", (DL_FUNC) &_lslearn_sharedNeighborhood, 5},
+    {"_lslearn_inTargetNeighborhood", (DL_FUNC) &_lslearn_inTargetNeighborhood, 4},
+    {"_lslearn_compareSkeletons", (DL_FUNC) &_lslearn_compareSkeletons, 3},
+    {"_lslearn_compareVStructures", (DL_FUNC) &_lslearn_compareVStructures, 3},
+    {"_lslearn_parentRecoveryAccuracy", (DL_FUNC) &_lslearn_parentRecoveryAccuracy, 4},
+    {"_lslearn_interNeighborhoodEdgeMetrics", (DL_FUNC) &_lslearn_interNeighborhoodEdgeMetrics, 5},
+    {"_lslearn_overallF1", (DL_FUNC) &_lslearn_overallF1, 4},
+    {"_lslearn_allMetrics", (DL_FUNC) &_lslearn_allMetrics, 8},
+    {"_lslearn_getNeighborhoodMetrics", (DL_FUNC) &_lslearn_getNeighborhoodMetrics, 1},
     {"_lslearn_validateTargetSNL", (DL_FUNC) &_lslearn_validateTargetSNL, 2},
     {"_lslearn_combn_cpp", (DL_FUNC) &_lslearn_combn_cpp, 2},
     {"_lslearn_isMember", (DL_FUNC) &_lslearn_isMember, 2},
