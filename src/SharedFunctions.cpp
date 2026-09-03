@@ -15,25 +15,36 @@ using namespace Rcpp;
 //'   representing the (single) empty combination.
 //' @details
 //' Tested: 12/16/20. Confirmed: 11/23/22.
+//'
+//' `l` is taken as a signed `int` (rather than `size_t`) specifically so a
+//' negative value can be rejected explicitly here: converting a negative
+//' double straight to `size_t` at the Rcpp boundary is implementation- and
+//' version-defined (it has been observed to both wrap around to a huge
+//' positive value and to clamp to 0 across different Rcpp/compiler
+//' versions), so it isn't a reliable way to reject bad input.
 //' @noRd
 // [[Rcpp::export]]
-NumericMatrix combn_cpp(NumericVector x, size_t l) {
+NumericMatrix combn_cpp(NumericVector x, int l) {
+  if (l < 0) {
+    stop("Combination size l must be non-negative");
+  }
+  size_t l_size = static_cast<size_t>(l);
   size_t xlength = x.length();
   NumericMatrix result;
 
-  if (l > x.length()) {
+  if (l_size > xlength) {
     stop("There aren't enough neighbors for the current value of l");
   }
 
-  if (l == 0) {
+  if (l_size == 0) {
     result = NumericMatrix(1, 1);
     result(0, 0) = NA_REAL;
-  } else if (xlength == 1 && l == 1) {
+  } else if (xlength == 1 && l_size == 1) {
     result = NumericMatrix(1, 1);
     result(0, 0) = x(0);
-  } else if (l >= 1 && xlength > 1) {
+  } else if (l_size >= 1 && xlength > 1) {
     Function f("combn");
-    result = f(Named("x") = x, _["m"] = l);
+    result = f(Named("x") = x, _["m"] = l_size);
   }
 
   return result;

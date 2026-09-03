@@ -12,13 +12,13 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // combn_cpp
-NumericMatrix combn_cpp(NumericVector x, size_t l);
+NumericMatrix combn_cpp(NumericVector x, int l);
 RcppExport SEXP _lslearn_combn_cpp(SEXP xSEXP, SEXP lSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< size_t >::type l(lSEXP);
+    Rcpp::traits::input_parameter< int >::type l(lSEXP);
     rcpp_result_gen = Rcpp::wrap(combn_cpp(x, l));
     return rcpp_result_gen;
 END_RCPP
