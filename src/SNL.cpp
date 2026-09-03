@@ -122,7 +122,7 @@ SNL::SNL(NumericMatrix true_dag, arma::mat df, NumericVector targets,
 // [[Rcpp::export]]
 void validateTargetSNL(NumericVector targets, const size_t &t) {
   if (!isMember(targets, t)) {
-    stop("Target %i is not a member of the target vector");
+    stop("Target %i is not a member of the target vector", static_cast<int>(t));
   }
 }
 
@@ -408,6 +408,6 @@ void SNL::run() {
   // Convert the adj. mat. to the proper dimensions
   convertFinalGraph();
   // Add up all the times for the target skeletons
-  total_time += std::accumulate(target_skeleton_times.begin(),
-                                target_skeleton_times.end(), 0);
+  total_time = std::accumulate(target_skeleton_times.begin(),
+                               target_skeleton_times.end(), 0);
 }
