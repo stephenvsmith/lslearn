@@ -69,7 +69,7 @@ get_mb <- function(target, dataset, threshold = 0.01, lmax = 3,
     cat(
       "Results for target",
       target, ":",
-      paste(mb@selectedVars, collapse = ","), "\n"
+      paste(mb_vars, collapse = ","), "\n"
     )
   }
 
@@ -291,7 +291,7 @@ capture_spouses <- function(params) {
     )
     # Test conditional independence of target and second-order neighbor
     # given the P-C set. If there is dependence, then we have a spouse.
-    if (length(second_order_neighbors > 0)) {
+    if (length(second_order_neighbors) > 0) {
       lapply(second_order_neighbors, function(x) {
         if (params$verbose) {
           cat("Checking if node", x, "is a spouse of target", target, "...")

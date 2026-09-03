@@ -21,10 +21,11 @@ static NumericVector getMBFromMat(NumericMatrix mb_mat, size_t x) {
 // Returns true if node i is in the MB of node target
 // false otherwise
 bool MBList::inMB(size_t target, size_t i) {
-  if (mb_list.count(i) == 0) {
-    stop("%i is not an element of the map.\n", i);
+  auto target_mb = mb_list.find(target);
+  if (target_mb == mb_list.end()) {
+    stop("%zu is not an element of the map.\n", target);
   }
-  return isMember(mb_list.find(target)->second, i);
+  return isMember(target_mb->second, i);
 }
 
 // Sample version

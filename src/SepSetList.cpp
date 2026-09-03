@@ -34,11 +34,11 @@ SepSetList::SepSetList(NumericVector &neighbors) : nodes(neighbors) {
 // Translation-unit-local: not declared in SepSetList.h, so `static` avoids
 // clashing with an unrelated `checkInputValues` in another .cpp file.
 static void checkInputValues(size_t i, size_t j, size_t N) {
-  if (i < 0 || i >= N) {
-    stop("Input i=%i is invalid", i);
+  if (i >= N) {
+    stop("Input i=%zu is invalid", i);
   }
-  if (j < 0 || j >= N) {
-    stop("Input j=%i is invalid", j);
+  if (j >= N) {
+    stop("Input j=%zu is invalid", j);
   }
 }
 
@@ -86,7 +86,7 @@ bool SepSetList::isSepSetMember(size_t i, size_t j, size_t k) {
   is_member_check = isMember(sepset_ji, k);
 
   if (is_member != is_member_check) {
-    warning("Separation sets for %i and %i disagree", i, j);
+    warning("Separation sets for %zu and %zu disagree", i, j);
   }
 
   return is_member && is_member_check;
