@@ -109,7 +109,7 @@ protected:
   size_t n = 0;
   size_t N; // Tracks the size of the C_tilde matrix
   size_t num_tests = 0;
-  double total_time;
+  double total_time = 0;
   NumericVector targets;
   NumericVector neighborhood; // tracks all nodes being considered by algorithm
   StringVector names;

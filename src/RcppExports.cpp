@@ -11,6 +11,53 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// sampleSNL
+List sampleSNL(NumericMatrix true_dag, arma::mat df, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, double signif_level, bool verbose, std::string test, bool estDAG);
+RcppExport SEXP _lslearn_sampleSNL(SEXP true_dagSEXP, SEXP dfSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP signif_levelSEXP, SEXP verboseSEXP, SEXP testSEXP, SEXP estDAGSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< double >::type signif_level(signif_levelSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    Rcpp::traits::input_parameter< std::string >::type test(testSEXP);
+    Rcpp::traits::input_parameter< bool >::type estDAG(estDAGSEXP);
+    rcpp_result_gen = Rcpp::wrap(sampleSNL(true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG));
+    return rcpp_result_gen;
+END_RCPP
+}
+// popSNL
+List popSNL(NumericMatrix true_dag, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, bool verbose);
+RcppExport SEXP _lslearn_popSNL(SEXP true_dagSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(popSNL(true_dag, targets, nodes_interest, names, lmax, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// validateTargetSNL
+void validateTargetSNL(NumericVector targets, const size_t& t);
+RcppExport SEXP _lslearn_validateTargetSNL(SEXP targetsSEXP, SEXP tSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< const size_t& >::type t(tSEXP);
+    validateTargetSNL(targets, t);
+    return R_NilValue;
+END_RCPP
+}
 // combn_cpp
 NumericMatrix combn_cpp(NumericVector x, int l);
 RcppExport SEXP _lslearn_combn_cpp(SEXP xSEXP, SEXP lSEXP) {
@@ -1079,10 +1126,219 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// checkInitializeSNL
+int checkInitializeSNL(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkInitializeSNL(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkInitializeSNL(td, df, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkGetTargetSkel
+NumericMatrix checkGetTargetSkel(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkGetTargetSkel(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkGetTargetSkel(td, df, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkGetVStructures
+NumericMatrix checkGetVStructures(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkGetVStructures(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkGetVStructures(td, df, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkInitializeSNLPop
+int checkInitializeSNLPop(NumericMatrix td, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkInitializeSNLPop(SEXP tdSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkInitializeSNLPop(td, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkGetTargetSkelPop
+NumericMatrix checkGetTargetSkelPop(NumericMatrix td, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkGetTargetSkelPop(SEXP tdSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkGetTargetSkelPop(td, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkGetVStructuresPop
+NumericMatrix checkGetVStructuresPop(NumericMatrix td, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkGetVStructuresPop(SEXP tdSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkGetVStructuresPop(td, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkRule1
+NumericMatrix checkRule1(NumericMatrix td, NumericMatrix test_mat, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkRule1(SEXP tdSEXP, SEXP test_matSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type test_mat(test_matSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkRule1(td, test_mat, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkRule2
+NumericMatrix checkRule2(NumericMatrix td, NumericMatrix test_mat, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkRule2(SEXP tdSEXP, SEXP test_matSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type test_mat(test_matSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkRule2(td, test_mat, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkRule3
+NumericMatrix checkRule3(NumericMatrix td, NumericMatrix test_mat, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkRule3(SEXP tdSEXP, SEXP test_matSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type test_mat(test_matSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkRule3(td, test_mat, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkRule4
+NumericMatrix checkRule4(NumericMatrix td, NumericMatrix test_mat, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkRule4(SEXP tdSEXP, SEXP test_matSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type test_mat(test_matSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkRule4(td, test_mat, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkSNLRules
+NumericMatrix checkSNLRules(NumericMatrix td, NumericMatrix test_mat, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkSNLRules(SEXP tdSEXP, SEXP test_matSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type test_mat(test_matSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkSNLRules(td, test_mat, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkSNL
+NumericMatrix checkSNL(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkSNL(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkSNL(td, df, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkSNLRun
+NumericMatrix checkSNLRun(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkSNLRun(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkSNLRun(td, df, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkSNLPop
+NumericMatrix checkSNLPop(NumericMatrix td, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkSNLPop(SEXP tdSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkSNLPop(td, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 RcppExport SEXP run_testthat_tests(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_lslearn_sampleSNL", (DL_FUNC) &_lslearn_sampleSNL, 10},
+    {"_lslearn_popSNL", (DL_FUNC) &_lslearn_popSNL, 6},
+    {"_lslearn_validateTargetSNL", (DL_FUNC) &_lslearn_validateTargetSNL, 2},
     {"_lslearn_combn_cpp", (DL_FUNC) &_lslearn_combn_cpp, 2},
     {"_lslearn_isMember", (DL_FUNC) &_lslearn_isMember, 2},
     {"_lslearn_getPartialCorrelation", (DL_FUNC) &_lslearn_getPartialCorrelation, 4},
@@ -1160,6 +1416,20 @@ static const R_CallMethodDef CallEntries[] = {
     {"_lslearn_checkIsSepSetMember", (DL_FUNC) &_lslearn_checkIsSepSetMember, 6},
     {"_lslearn_checkPotentialVStruct", (DL_FUNC) &_lslearn_checkPotentialVStruct, 5},
     {"_lslearn_checkGetS", (DL_FUNC) &_lslearn_checkGetS, 4},
+    {"_lslearn_checkInitializeSNL", (DL_FUNC) &_lslearn_checkInitializeSNL, 5},
+    {"_lslearn_checkGetTargetSkel", (DL_FUNC) &_lslearn_checkGetTargetSkel, 5},
+    {"_lslearn_checkGetVStructures", (DL_FUNC) &_lslearn_checkGetVStructures, 5},
+    {"_lslearn_checkInitializeSNLPop", (DL_FUNC) &_lslearn_checkInitializeSNLPop, 4},
+    {"_lslearn_checkGetTargetSkelPop", (DL_FUNC) &_lslearn_checkGetTargetSkelPop, 4},
+    {"_lslearn_checkGetVStructuresPop", (DL_FUNC) &_lslearn_checkGetVStructuresPop, 4},
+    {"_lslearn_checkRule1", (DL_FUNC) &_lslearn_checkRule1, 5},
+    {"_lslearn_checkRule2", (DL_FUNC) &_lslearn_checkRule2, 5},
+    {"_lslearn_checkRule3", (DL_FUNC) &_lslearn_checkRule3, 5},
+    {"_lslearn_checkRule4", (DL_FUNC) &_lslearn_checkRule4, 5},
+    {"_lslearn_checkSNLRules", (DL_FUNC) &_lslearn_checkSNLRules, 5},
+    {"_lslearn_checkSNL", (DL_FUNC) &_lslearn_checkSNL, 5},
+    {"_lslearn_checkSNLRun", (DL_FUNC) &_lslearn_checkSNLRun, 5},
+    {"_lslearn_checkSNLPop", (DL_FUNC) &_lslearn_checkSNLPop, 4},
     {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
     {NULL, NULL, 0}
 };
