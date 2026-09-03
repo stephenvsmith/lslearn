@@ -11,6 +11,13 @@
 #'   representing the (single) empty combination.
 #' @details
 #' Tested: 12/16/20. Confirmed: 11/23/22.
+#'
+#' `l` is taken as a signed `int` (rather than `size_t`) specifically so a
+#' negative value can be rejected explicitly here: converting a negative
+#' double straight to `size_t` at the Rcpp boundary is implementation- and
+#' version-defined (it has been observed to both wrap around to a huge
+#' positive value and to clamp to 0 across different Rcpp/compiler
+#' versions), so it isn't a reliable way to reject bad input.
 #' @noRd
 combn_cpp <- function(x, l) {
     .Call(`_lslearn_combn_cpp`, x, l)
@@ -153,6 +160,130 @@ condInttestdis <- function(df, i, j, k, signif_level) {
 
 testArmaCor <- function(M) {
     .Call(`_lslearn_testArmaCor`, M)
+}
+
+check_amat_works <- function(nodes, node_names, adj) {
+    .Call(`_lslearn_check_amat_works`, nodes, node_names, adj)
+}
+
+check_amat_works_onepar <- function(nodes) {
+    .Call(`_lslearn_check_amat_works_onepar`, nodes)
+}
+
+check_names_works <- function(nodes, node_names, adj) {
+    .Call(`_lslearn_check_names_works`, nodes, node_names, adj)
+}
+
+check_dag_object <- function(nodes, node_names, adj, v = FALSE) {
+    .Call(`_lslearn_check_dag_object`, nodes, node_names, adj, v)
+}
+
+check_pdag_object <- function(nodes, node_names, adj, v = FALSE) {
+    .Call(`_lslearn_check_pdag_object`, nodes, node_names, adj, v)
+}
+
+check_dag_object2 <- function(nodes) {
+    invisible(.Call(`_lslearn_check_dag_object2`, nodes))
+}
+
+check_pdag_object2 <- function(nodes) {
+    invisible(.Call(`_lslearn_check_pdag_object2`, nodes))
+}
+
+check_neighbors_retrieval <- function(nodes, node_names, adj, t, v = FALSE) {
+    .Call(`_lslearn_check_neighbors_retrieval`, nodes, node_names, adj, t, v)
+}
+
+check_neighbors_retrieval_multi <- function(nodes, node_names, adj, t, v = FALSE) {
+    .Call(`_lslearn_check_neighbors_retrieval_multi`, nodes, node_names, adj, t, v)
+}
+
+check_pdag_neighbors_retrieval <- function(nodes, node_names, adj, t, v = FALSE) {
+    .Call(`_lslearn_check_pdag_neighbors_retrieval`, nodes, node_names, adj, t, v)
+}
+
+check_amat_retrieval <- function(nodes, node_names, adj, i, j) {
+    .Call(`_lslearn_check_amat_retrieval`, nodes, node_names, adj, i, j)
+}
+
+check_amat_retrieval_function <- function(nodes, node_names, adj, i, j) {
+    .Call(`_lslearn_check_amat_retrieval_function`, nodes, node_names, adj, i, j)
+}
+
+check_amat_row_retrieval <- function(nodes, node_names, adj, i) {
+    .Call(`_lslearn_check_amat_row_retrieval`, nodes, node_names, adj, i)
+}
+
+check_amat_col_retrieval <- function(nodes, node_names, adj, j) {
+    .Call(`_lslearn_check_amat_col_retrieval`, nodes, node_names, adj, j)
+}
+
+check_adjacent_non_adjacent <- function(nodes, node_names, adj, i) {
+    .Call(`_lslearn_check_adjacent_non_adjacent`, nodes, node_names, adj, i)
+}
+
+check_non_adjacent_solo <- function(nodes, node_names, adj, i) {
+    .Call(`_lslearn_check_non_adjacent_solo`, nodes, node_names, adj, i)
+}
+
+check_directed_undirected <- function(nodes, node_names, adj, i, j) {
+    .Call(`_lslearn_check_directed_undirected`, nodes, node_names, adj, i, j)
+}
+
+check_sizes <- function(nodes, node_names, adj) {
+    .Call(`_lslearn_check_sizes`, nodes, node_names, adj)
+}
+
+check_amat_setval <- function(nodes, node_names, adj, i, j, val) {
+    .Call(`_lslearn_check_amat_setval`, nodes, node_names, adj, i, j, val)
+}
+
+check_amat_setval_function <- function(nodes, node_names, adj, i, j, val) {
+    .Call(`_lslearn_check_amat_setval_function`, nodes, node_names, adj, i, j, val)
+}
+
+checkIfAdjacent <- function(nodes, node_names, adj, i, j) {
+    .Call(`_lslearn_checkIfAdjacent`, nodes, node_names, adj, i, j)
+}
+
+checkEmptyGraph <- function(p) {
+    .Call(`_lslearn_checkEmptyGraph`, p)
+}
+
+checkAcyclicity <- function(nodes, node_names, adj) {
+    .Call(`_lslearn_checkAcyclicity`, nodes, node_names, adj)
+}
+
+checkIsAncestor <- function(nodes, node_names, adj, desc, anc, verbose = FALSE) {
+    .Call(`_lslearn_checkIsAncestor`, nodes, node_names, adj, desc, anc, verbose)
+}
+
+checkInNeighborhood <- function(nodes, node_names, adj, i, j, verbose = FALSE) {
+    .Call(`_lslearn_checkInNeighborhood`, nodes, node_names, adj, i, j, verbose)
+}
+
+check_pdag_inNeighborhood <- function(nodes, node_names, adj, i, j, verbose = FALSE) {
+    .Call(`_lslearn_check_pdag_inNeighborhood`, nodes, node_names, adj, i, j, verbose)
+}
+
+check_set_amat <- function(nodes, node_names, adj) {
+    .Call(`_lslearn_check_set_amat`, nodes, node_names, adj)
+}
+
+check_disc_path <- function(nodes, node_names, adj, c, d, e) {
+    .Call(`_lslearn_check_disc_path`, nodes, node_names, adj, c, d, e)
+}
+
+check_upd_path <- function(nodes, node_names, adj, a, b, e) {
+    .Call(`_lslearn_check_upd_path`, nodes, node_names, adj, a, b, e)
+}
+
+test_checkWronglyCovered <- function(nodes, node_names, adj, p) {
+    invisible(.Call(`_lslearn_test_checkWronglyCovered`, nodes, node_names, adj, p))
+}
+
+checkNeighborhoodId <- function(nodes, node_names, adj, i, verbose = FALSE) {
+    .Call(`_lslearn_checkNeighborhoodId`, nodes, node_names, adj, i, verbose)
 }
 
 test_union <- function(x, y) {
