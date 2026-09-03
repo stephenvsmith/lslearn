@@ -88,7 +88,14 @@ condIndTest <- function(C, i, j, k, n, signif_level) {
 #'   `pval` (1 if d-separated, 0 otherwise), for interface consistency with
 #'   `condIndTest()`.
 #' @details Delegates to the R-level `my_dsep()` helper (see
-#'   `R/misc-helper.R`), which in turn uses `bnlearn::dsep()`.
+#'   `R/misc-helper.R`), which in turn uses `bnlearn::dsep()`. `my_dsep()`
+#'   is internal (not exported), so it must be looked up through the
+#'   package namespace rather than via a plain `Function("my_dsep")`
+#'   constructor: the latter only finds it when the whole package is
+#'   attached to the search path unnamespaced (e.g. under
+#'   `pkgload::load_all()`), not for a normally `library()`-loaded
+#'   package, where non-exported functions aren't on the search path by
+#'   name.
 #' @noRd
 condIndTestPop <- function(G, i, j, k) {
     .Call(`_lslearn_condIndTestPop`, G, i, j, k)
@@ -160,6 +167,34 @@ condInttestdis <- function(df, i, j, k, signif_level) {
 
 testArmaCor <- function(M) {
     .Call(`_lslearn_testArmaCor`, M)
+}
+
+testConstructSample <- function(true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG) {
+    .Call(`_lslearn_testConstructSample`, true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG)
+}
+
+testConstructPop <- function(true_dag, targets, nodes_interest, names, lmax, verbose) {
+    .Call(`_lslearn_testConstructPop`, true_dag, targets, nodes_interest, names, lmax, verbose)
+}
+
+testCheckSeparationPop <- function(true_dag, targets, nodes_interest, names, lmax, verbose, l, i, j, kvals) {
+    .Call(`_lslearn_testCheckSeparationPop`, true_dag, targets, nodes_interest, names, lmax, verbose, l, i, j, kvals)
+}
+
+testCheckSeparationSample <- function(true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG, l, i, j, kvals) {
+    .Call(`_lslearn_testCheckSeparationSample`, true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG, l, i, j, kvals)
+}
+
+testGetVStructuresManual <- function(true_dag, targets, nodes_interest, names, lmax, verbose, custom_amat, sep_i, sep_j, sep_k) {
+    .Call(`_lslearn_testGetVStructuresManual`, true_dag, targets, nodes_interest, names, lmax, verbose, custom_amat, sep_i, sep_j, sep_k)
+}
+
+testPrintElements <- function(true_dag, targets, nodes_interest, names, lmax, verbose) {
+    invisible(.Call(`_lslearn_testPrintElements`, true_dag, targets, nodes_interest, names, lmax, verbose))
+}
+
+testAlgoSettersAndAccessors <- function(true_dag, targets, nodes_interest, names, lmax, verbose, new_amat, new_neighbors) {
+    .Call(`_lslearn_testAlgoSettersAndAccessors`, true_dag, targets, nodes_interest, names, lmax, verbose, new_amat, new_neighbors)
 }
 
 check_amat_works <- function(nodes, node_names, adj) {

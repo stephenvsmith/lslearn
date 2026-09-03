@@ -156,6 +156,139 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// testConstructSample
+List testConstructSample(NumericMatrix true_dag, arma::mat df, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, double signif_level, bool verbose, std::string test, bool estDAG);
+RcppExport SEXP _lslearn_testConstructSample(SEXP true_dagSEXP, SEXP dfSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP signif_levelSEXP, SEXP verboseSEXP, SEXP testSEXP, SEXP estDAGSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< double >::type signif_level(signif_levelSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    Rcpp::traits::input_parameter< std::string >::type test(testSEXP);
+    Rcpp::traits::input_parameter< bool >::type estDAG(estDAGSEXP);
+    rcpp_result_gen = Rcpp::wrap(testConstructSample(true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testConstructPop
+List testConstructPop(NumericMatrix true_dag, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, bool verbose);
+RcppExport SEXP _lslearn_testConstructPop(SEXP true_dagSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(testConstructPop(true_dag, targets, nodes_interest, names, lmax, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testCheckSeparationPop
+List testCheckSeparationPop(NumericMatrix true_dag, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, bool verbose, int l, size_t i, size_t j, NumericMatrix kvals);
+RcppExport SEXP _lslearn_testCheckSeparationPop(SEXP true_dagSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP verboseSEXP, SEXP lSEXP, SEXP iSEXP, SEXP jSEXP, SEXP kvalsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    Rcpp::traits::input_parameter< int >::type l(lSEXP);
+    Rcpp::traits::input_parameter< size_t >::type i(iSEXP);
+    Rcpp::traits::input_parameter< size_t >::type j(jSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type kvals(kvalsSEXP);
+    rcpp_result_gen = Rcpp::wrap(testCheckSeparationPop(true_dag, targets, nodes_interest, names, lmax, verbose, l, i, j, kvals));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testCheckSeparationSample
+List testCheckSeparationSample(NumericMatrix true_dag, arma::mat df, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, double signif_level, bool verbose, std::string test, bool estDAG, int l, size_t i, size_t j, NumericMatrix kvals);
+RcppExport SEXP _lslearn_testCheckSeparationSample(SEXP true_dagSEXP, SEXP dfSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP signif_levelSEXP, SEXP verboseSEXP, SEXP testSEXP, SEXP estDAGSEXP, SEXP lSEXP, SEXP iSEXP, SEXP jSEXP, SEXP kvalsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< double >::type signif_level(signif_levelSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    Rcpp::traits::input_parameter< std::string >::type test(testSEXP);
+    Rcpp::traits::input_parameter< bool >::type estDAG(estDAGSEXP);
+    Rcpp::traits::input_parameter< int >::type l(lSEXP);
+    Rcpp::traits::input_parameter< size_t >::type i(iSEXP);
+    Rcpp::traits::input_parameter< size_t >::type j(jSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type kvals(kvalsSEXP);
+    rcpp_result_gen = Rcpp::wrap(testCheckSeparationSample(true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG, l, i, j, kvals));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testGetVStructuresManual
+List testGetVStructuresManual(NumericMatrix true_dag, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, bool verbose, NumericMatrix custom_amat, size_t sep_i, size_t sep_j, NumericVector sep_k);
+RcppExport SEXP _lslearn_testGetVStructuresManual(SEXP true_dagSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP verboseSEXP, SEXP custom_amatSEXP, SEXP sep_iSEXP, SEXP sep_jSEXP, SEXP sep_kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type custom_amat(custom_amatSEXP);
+    Rcpp::traits::input_parameter< size_t >::type sep_i(sep_iSEXP);
+    Rcpp::traits::input_parameter< size_t >::type sep_j(sep_jSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type sep_k(sep_kSEXP);
+    rcpp_result_gen = Rcpp::wrap(testGetVStructuresManual(true_dag, targets, nodes_interest, names, lmax, verbose, custom_amat, sep_i, sep_j, sep_k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testPrintElements
+void testPrintElements(NumericMatrix true_dag, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, bool verbose);
+RcppExport SEXP _lslearn_testPrintElements(SEXP true_dagSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    testPrintElements(true_dag, targets, nodes_interest, names, lmax, verbose);
+    return R_NilValue;
+END_RCPP
+}
+// testAlgoSettersAndAccessors
+List testAlgoSettersAndAccessors(NumericMatrix true_dag, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, bool verbose, NumericMatrix new_amat, NumericVector new_neighbors);
+RcppExport SEXP _lslearn_testAlgoSettersAndAccessors(SEXP true_dagSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP verboseSEXP, SEXP new_amatSEXP, SEXP new_neighborsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type new_amat(new_amatSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type new_neighbors(new_neighborsSEXP);
+    rcpp_result_gen = Rcpp::wrap(testAlgoSettersAndAccessors(true_dag, targets, nodes_interest, names, lmax, verbose, new_amat, new_neighbors));
+    return rcpp_result_gen;
+END_RCPP
+}
 // check_amat_works
 NumericMatrix check_amat_works(int nodes, StringVector node_names, NumericMatrix adj);
 RcppExport SEXP _lslearn_check_amat_works(SEXP nodesSEXP, SEXP node_namesSEXP, SEXP adjSEXP) {
@@ -961,6 +1094,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"_lslearn_get_G2_all", (DL_FUNC) &_lslearn_get_G2_all, 3},
     {"_lslearn_condInttestdis", (DL_FUNC) &_lslearn_condInttestdis, 5},
     {"_lslearn_testArmaCor", (DL_FUNC) &_lslearn_testArmaCor, 1},
+    {"_lslearn_testConstructSample", (DL_FUNC) &_lslearn_testConstructSample, 10},
+    {"_lslearn_testConstructPop", (DL_FUNC) &_lslearn_testConstructPop, 6},
+    {"_lslearn_testCheckSeparationPop", (DL_FUNC) &_lslearn_testCheckSeparationPop, 10},
+    {"_lslearn_testCheckSeparationSample", (DL_FUNC) &_lslearn_testCheckSeparationSample, 14},
+    {"_lslearn_testGetVStructuresManual", (DL_FUNC) &_lslearn_testGetVStructuresManual, 10},
+    {"_lslearn_testPrintElements", (DL_FUNC) &_lslearn_testPrintElements, 6},
+    {"_lslearn_testAlgoSettersAndAccessors", (DL_FUNC) &_lslearn_testAlgoSettersAndAccessors, 8},
     {"_lslearn_check_amat_works", (DL_FUNC) &_lslearn_check_amat_works, 3},
     {"_lslearn_check_amat_works_onepar", (DL_FUNC) &_lslearn_check_amat_works_onepar, 1},
     {"_lslearn_check_names_works", (DL_FUNC) &_lslearn_check_names_works, 3},

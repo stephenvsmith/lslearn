@@ -110,12 +110,20 @@ List condIndTest(arma::mat &C, const size_t &i, const size_t &j,
 //'   `pval` (1 if d-separated, 0 otherwise), for interface consistency with
 //'   `condIndTest()`.
 //' @details Delegates to the R-level `my_dsep()` helper (see
-//'   `R/misc-helper.R`), which in turn uses `bnlearn::dsep()`.
+//'   `R/misc-helper.R`), which in turn uses `bnlearn::dsep()`. `my_dsep()`
+//'   is internal (not exported), so it must be looked up through the
+//'   package namespace rather than via a plain `Function("my_dsep")`
+//'   constructor: the latter only finds it when the whole package is
+//'   attached to the search path unnamespaced (e.g. under
+//'   `pkgload::load_all()`), not for a normally `library()`-loaded
+//'   package, where non-exported functions aren't on the search path by
+//'   name.
 //' @noRd
 // [[Rcpp::export]]
 List condIndTestPop(NumericMatrix G, const size_t &i, const size_t &j,
                     const arma::uvec &k) {
-  Function my_dsep("my_dsep");
+  Environment lslearn_ns = Environment::namespace_env("lslearn");
+  Function my_dsep = lslearn_ns["my_dsep"];
   NumericVector tmp = my_dsep(G, i, j, k);
   double pval = tmp[0];
   bool accept_H0 = static_cast<bool>(pval);
