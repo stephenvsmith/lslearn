@@ -230,7 +230,7 @@ test_that("Rule 4 contradiction testing", {
     )
   )
   # Tail should have been converted to an arrowhead
-  expect_equal(adj_mat4_v3[a, b], 2)
+  expect_equal(r4_contradiction[a, b], 2)
 })
 
 test_that("Rule 8 is correct.", {
