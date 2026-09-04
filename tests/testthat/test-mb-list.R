@@ -51,7 +51,14 @@ test_that("Membership in MB function is correct", {
   expect_false(testIsMBMember(nodes, mb_mat, 4, 0))
   expect_false(testIsMBMember(nodes, mb_mat, 3, 2))
 
-  expect_error(testIsMBMember(nodes, mb_mat, 3, 15))
+  # Membership queries do not require the candidate node to have its own map
+  # entry, but the target whose MB is queried must exist.
+  expect_false(testIsMBMember(nodes, mb_mat, 3, 15))
+  expect_error(
+    testIsMBMember(nodes, mb_mat, 15, 3),
+    "15 is not an element of the map",
+    fixed = TRUE
+  )
 })
 
 nodes <- seq(0, 7)

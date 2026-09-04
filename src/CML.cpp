@@ -33,7 +33,7 @@ CML::CML(NumericMatrix true_dag, NumericVector targets,
   // Make a map to relate efficient numbering to true numbering
   // Map: true numbering -> efficient numbering
   for (size_t i = 0; i < N; ++i) {
-    node_numbering.insert(std::pair<int, int>(neighborhood(i), i));
+    node_numbering.insert(std::pair<size_t, size_t>(neighborhood(i), i));
   }
   if (verbose) {
     Rcout << "Element mapping for efficient ordering:\n";
@@ -1060,7 +1060,7 @@ void CML::run() {
 
   total_time = total_skeleton_time;
   total_time += std::accumulate(target_skeleton_times.begin(),
-                                target_skeleton_times.end(), 0);
+                                target_skeleton_times.end(), 0.0);
 }
 
 void CML::run_mag() {
@@ -1093,5 +1093,5 @@ void CML::run_mag() {
 
   total_time = total_skeleton_time;
   total_time += std::accumulate(target_skeleton_times.begin(),
-                                target_skeleton_times.end(), 0);
+                                target_skeleton_times.end(), 0.0);
 }

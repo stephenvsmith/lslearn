@@ -123,7 +123,8 @@ List sampleCML(NumericMatrix true_dag, arma::mat df, NumericVector targets,
 
   auto end = high_resolution_clock::now();
   auto duration = duration_cast<microseconds>(end - start);
-  double total_time = duration.count() / 1e6; // Get time in seconds
+  double total_time = duration.count() / 1e6;
+  total_time /= 60; // Get time in minutes
 
   // Ensure we have proper notation for every edge
   cml.checkNotation();
@@ -211,7 +212,8 @@ List sampleCML_mag(NumericMatrix true_dag, arma::mat df, NumericVector targets,
 
   auto end = high_resolution_clock::now();
   auto duration = duration_cast<microseconds>(end - start);
-  double total_time = duration.count() / 1e6; // Get time in seconds
+  double total_time = duration.count() / 1e6;
+  total_time /= 60; // Get time in minutes
 
   // Ensure we have proper notation for every edge
   cml.checkNotation();

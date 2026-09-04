@@ -7,7 +7,7 @@
 
 // Change adj. mat. so that we have a complete graph within the target nbhd.
 static void fillTargetNeighborhood(Graph *C_tilde,
-                                   std::map<int, int> node_numbering,
+                                   std::map<size_t, size_t> node_numbering,
                                    NumericVector nbhd_t) {
   size_t i_eff;
   size_t j_eff;
@@ -27,7 +27,8 @@ static void fillTargetNeighborhood(Graph *C_tilde,
  * Create the adjacency matrix representing complete graphs for each
  * neighborhood
  */
-static void createInitialAmat(Graph *C_tilde, std::map<int, int> node_numbering,
+static void createInitialAmat(Graph *C_tilde,
+                              std::map<size_t, size_t> node_numbering,
                               MBList *mb_list, NumericVector &targets,
                               NumericVector &neighborhood, const size_t &N,
                               bool verbose) {
@@ -68,7 +69,7 @@ SNL::SNL(NumericMatrix true_dag, NumericVector targets,
   // Make a map to relate efficient numbering to true numbering
   // Map: true numbering -> efficient numbering
   for (size_t i = 0; i < N; ++i) {
-    node_numbering.insert(std::pair<int, int>(neighborhood(i), i));
+    node_numbering.insert(std::pair<size_t, size_t>(neighborhood(i), i));
   }
   if (verbose) {
     Rcout << "Element mapping for efficient ordering (True -> Efficient):\n";
@@ -95,7 +96,7 @@ SNL::SNL(NumericMatrix true_dag, arma::mat df, NumericVector targets,
   // Make a map to relate efficient numbering to true numbering
   // Map: true numbering -> efficient numbering
   for (size_t i = 0; i < N; ++i) {
-    node_numbering.insert(std::pair<int, int>(neighborhood(i), i));
+    node_numbering.insert(std::pair<size_t, size_t>(neighborhood(i), i));
   }
   if (verbose) {
     Rcout << "Element mapping for efficient ordering:\n";
@@ -122,7 +123,7 @@ SNL::SNL(NumericMatrix true_dag, arma::mat df, NumericVector targets,
 // [[Rcpp::export]]
 void validateTargetSNL(NumericVector targets, const size_t &t) {
   if (!isMember(targets, t)) {
-    stop("Target %i is not a member of the target vector");
+    stop("Target %i is not a member of the target vector", static_cast<int>(t));
   }
 }
 
@@ -408,6 +409,6 @@ void SNL::run() {
   // Convert the adj. mat. to the proper dimensions
   convertFinalGraph();
   // Add up all the times for the target skeletons
-  total_time += std::accumulate(target_skeleton_times.begin(),
-                                target_skeleton_times.end(), 0);
+  total_time = std::accumulate(target_skeleton_times.begin(),
+                               target_skeleton_times.end(), 0.0);
 }

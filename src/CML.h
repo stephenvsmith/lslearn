@@ -75,7 +75,7 @@ public:
   void checkNotation(); // tested
 
 private:
-  std::map<int, int> node_numbering;
+  std::map<size_t, size_t> node_numbering;
   NumericVector rules_used = NumericVector(11);
   std::vector<double> target_skeleton_times;
   double total_skeleton_time;
