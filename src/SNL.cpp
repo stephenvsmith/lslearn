@@ -144,6 +144,22 @@ void SNL::getSkeletonTarget(const size_t &t) {
   target_neighborhood.push_back(target_efficient);
   std::sort(target_neighborhood.begin(), target_neighborhood.end());
 
+  // Per Algorithm 2 (line 3), separating sets for every pair in this
+  // target's neighborhood are drawn from a single shared pool: the
+  // target's first- and second-order neighbors (N1_t U N2_t), in true
+  // node numbering. The target itself is trivially adjacent to every
+  // member of N1_t, so it must remain a valid conditioning candidate for
+  // separating pairs within its own neighborhood (e.g. a parent and
+  // child of t, which are only d-separated by conditioning on t).
+  NumericVector n1_t = mb_list->getMB(t);
+  NumericVector nbt_true = clone(n1_t);
+  nbt_true.push_back(t);
+  bool nbt_tmp = mb_list->silencer();
+  NumericVector n2_t = mb_list->getMBMultipleTargets(nbt_true, false, true);
+  mb_list->removeSilencer(nbt_tmp);
+  NumericVector target_pool = union_(n1_t, n2_t);
+  target_pool.push_back(t);
+
   if (verbose) {
     Rcout << "\n\nFinding skeleton for the neighborhood of target " << t;
     Rcout << " (Name: " << names(t)
@@ -189,14 +205,12 @@ void SNL::getSkeletonTarget(const size_t &t) {
             Rcout << "The value of j is " << j << std::endl;
           }
           if (l > 0) {
-            // Find neighbors of i and j from the true DAG (or they are
-            // estimated) These neighbors are using the true node numbers
-            // (check documentation for this function)
-            bool tmp = mb_list->silencer();
-            neighbors = mb_list->getMBMultipleTargets(
-                NumericVector::create(neighborhood(i), neighborhood(j)), false,
-                true); // don't include target nodes
-            mb_list->removeSilencer(tmp);
+            // Candidates are drawn from the shared target-level pool
+            // (N1_t U N2_t), minus i and j themselves, using the true node
+            // numbers (check documentation for this function)
+            neighbors =
+                setdiff(target_pool, NumericVector::create(neighborhood(i),
+                                                           neighborhood(j)));
             if (verbose) {
               printVecElementsNoNames(neighbors,
                                       "Potential separating nodes: ", "\n");
