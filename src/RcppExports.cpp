@@ -47,6 +47,78 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sampleCML
+List sampleCML(NumericMatrix true_dag, arma::mat df, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, double signif_level, bool verbose, std::string test, bool estDAG);
+RcppExport SEXP _lslearn_sampleCML(SEXP true_dagSEXP, SEXP dfSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP signif_levelSEXP, SEXP verboseSEXP, SEXP testSEXP, SEXP estDAGSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< double >::type signif_level(signif_levelSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    Rcpp::traits::input_parameter< std::string >::type test(testSEXP);
+    Rcpp::traits::input_parameter< bool >::type estDAG(estDAGSEXP);
+    rcpp_result_gen = Rcpp::wrap(sampleCML(true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG));
+    return rcpp_result_gen;
+END_RCPP
+}
+// popCML
+List popCML(NumericMatrix true_dag, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, bool verbose);
+RcppExport SEXP _lslearn_popCML(SEXP true_dagSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(popCML(true_dag, targets, nodes_interest, names, lmax, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sampleCML_mag
+List sampleCML_mag(NumericMatrix true_dag, arma::mat df, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, double signif_level, bool verbose, std::string test, bool estDAG);
+RcppExport SEXP _lslearn_sampleCML_mag(SEXP true_dagSEXP, SEXP dfSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP signif_levelSEXP, SEXP verboseSEXP, SEXP testSEXP, SEXP estDAGSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< double >::type signif_level(signif_levelSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    Rcpp::traits::input_parameter< std::string >::type test(testSEXP);
+    Rcpp::traits::input_parameter< bool >::type estDAG(estDAGSEXP);
+    rcpp_result_gen = Rcpp::wrap(sampleCML_mag(true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG));
+    return rcpp_result_gen;
+END_RCPP
+}
+// popCML_mag
+List popCML_mag(NumericMatrix true_dag, NumericVector targets, NumericVector nodes_interest, StringVector names, int lmax, bool verbose);
+RcppExport SEXP _lslearn_popCML_mag(SEXP true_dagSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP lmaxSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type true_dag(true_dagSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type lmax(lmaxSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(popCML_mag(true_dag, targets, nodes_interest, names, lmax, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
 // validateTargetSNL
 void validateTargetSNL(NumericVector targets, const size_t& t);
 RcppExport SEXP _lslearn_validateTargetSNL(SEXP targetsSEXP, SEXP tSEXP) {
@@ -189,6 +261,219 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const arma::uvec& >::type k(kSEXP);
     Rcpp::traits::input_parameter< const double& >::type signif_level(signif_levelSEXP);
     rcpp_result_gen = Rcpp::wrap(condInttestdis(df, i, j, k, signif_level));
+    return rcpp_result_gen;
+END_RCPP
+}
+// initializeCML
+void initializeCML(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_initializeCML(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    initializeCML(td, df, t, nodes_interest, names);
+    return R_NilValue;
+END_RCPP
+}
+// initializeCMLPop
+void initializeCMLPop(NumericMatrix td, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_initializeCMLPop(SEXP tdSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    initializeCMLPop(td, t, nodes_interest, names);
+    return R_NilValue;
+END_RCPP
+}
+// getSizeCML
+int getSizeCML(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_getSizeCML(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(getSizeCML(td, df, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// setSCML
+List setSCML(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names, size_t i, size_t j, NumericVector k);
+RcppExport SEXP _lslearn_setSCML(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP iSEXP, SEXP jSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< size_t >::type i(iSEXP);
+    Rcpp::traits::input_parameter< size_t >::type j(jSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(setSCML(td, df, t, nodes_interest, names, i, j, k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// setVerboseCML
+void setVerboseCML(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_setVerboseCML(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    setVerboseCML(td, df, t, nodes_interest, names);
+    return R_NilValue;
+END_RCPP
+}
+// checkSkeletonTotal
+NumericMatrix checkSkeletonTotal(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkSkeletonTotal(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkSkeletonTotal(td, df, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkSkeletonTotalPop
+NumericMatrix checkSkeletonTotalPop(NumericMatrix td, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkSkeletonTotalPop(SEXP tdSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkSkeletonTotalPop(td, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkVStruct
+NumericMatrix checkVStruct(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkVStruct(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkVStruct(td, df, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkVStructPop
+NumericMatrix checkVStructPop(NumericMatrix td, NumericVector t, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkVStructPop(SEXP tdSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkVStructPop(td, t, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkAdjMatConversion
+NumericMatrix checkAdjMatConversion(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names, NumericMatrix m, NumericVector neighbors);
+RcppExport SEXP _lslearn_checkAdjMatConversion(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP mSEXP, SEXP neighborsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type neighbors(neighborsSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkAdjMatConversion(td, df, t, nodes_interest, names, m, neighbors));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkNotationWarnings
+NumericMatrix checkNotationWarnings(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names, NumericMatrix m);
+RcppExport SEXP _lslearn_checkNotationWarnings(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkNotationWarnings(td, df, t, nodes_interest, names, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkSeparationTest
+double checkSeparationTest(NumericMatrix td, arma::mat df, NumericVector t, NumericVector nodes_interest, StringVector names, int i, int j, int l, NumericVector nodes_to_skip);
+RcppExport SEXP _lslearn_checkSeparationTest(SEXP tdSEXP, SEXP dfSEXP, SEXP tSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP, SEXP iSEXP, SEXP jSEXP, SEXP lSEXP, SEXP nodes_to_skipSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< int >::type l(lSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_to_skip(nodes_to_skipSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkSeparationTest(td, df, t, nodes_interest, names, i, j, l, nodes_to_skip));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkCMLSummary
+NumericMatrix checkCMLSummary(NumericMatrix td, arma::mat df, NumericVector targets, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkCMLSummary(SEXP tdSEXP, SEXP dfSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkCMLSummary(td, df, targets, nodes_interest, names));
+    return rcpp_result_gen;
+END_RCPP
+}
+// checkCMLSummaryPop
+NumericMatrix checkCMLSummaryPop(NumericMatrix td, NumericVector targets, NumericVector nodes_interest, StringVector names);
+RcppExport SEXP _lslearn_checkCMLSummaryPop(SEXP tdSEXP, SEXP targetsSEXP, SEXP nodes_interestSEXP, SEXP namesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type targets(targetsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type nodes_interest(nodes_interestSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    rcpp_result_gen = Rcpp::wrap(checkCMLSummaryPop(td, targets, nodes_interest, names));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1001,6 +1286,144 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// testRule1
+NumericMatrix testRule1(NumericMatrix td, arma::mat dummy_df, NumericVector dummy_t, StringVector names, NumericMatrix m);
+RcppExport SEXP _lslearn_testRule1(SEXP tdSEXP, SEXP dummy_dfSEXP, SEXP dummy_tSEXP, SEXP namesSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type dummy_df(dummy_dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dummy_t(dummy_tSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(testRule1(td, dummy_df, dummy_t, names, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testRule2
+NumericMatrix testRule2(NumericMatrix td, arma::mat dummy_df, NumericVector dummy_t, StringVector names, NumericMatrix m);
+RcppExport SEXP _lslearn_testRule2(SEXP tdSEXP, SEXP dummy_dfSEXP, SEXP dummy_tSEXP, SEXP namesSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type dummy_df(dummy_dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dummy_t(dummy_tSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(testRule2(td, dummy_df, dummy_t, names, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testRule3
+NumericMatrix testRule3(NumericMatrix td, arma::mat dummy_df, NumericVector dummy_t, StringVector names, NumericMatrix m);
+RcppExport SEXP _lslearn_testRule3(SEXP tdSEXP, SEXP dummy_dfSEXP, SEXP dummy_tSEXP, SEXP namesSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type dummy_df(dummy_dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dummy_t(dummy_tSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(testRule3(td, dummy_df, dummy_t, names, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testRule4
+NumericMatrix testRule4(NumericMatrix td, arma::mat dummy_df, NumericVector dummy_t, StringVector names, NumericMatrix m, int i, int j, NumericVector k);
+RcppExport SEXP _lslearn_testRule4(SEXP tdSEXP, SEXP dummy_dfSEXP, SEXP dummy_tSEXP, SEXP namesSEXP, SEXP mSEXP, SEXP iSEXP, SEXP jSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type dummy_df(dummy_dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dummy_t(dummy_tSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(testRule4(td, dummy_df, dummy_t, names, m, i, j, k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testRule8
+NumericMatrix testRule8(NumericMatrix td, arma::mat dummy_df, NumericVector dummy_t, StringVector names, NumericMatrix m);
+RcppExport SEXP _lslearn_testRule8(SEXP tdSEXP, SEXP dummy_dfSEXP, SEXP dummy_tSEXP, SEXP namesSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type dummy_df(dummy_dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dummy_t(dummy_tSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(testRule8(td, dummy_df, dummy_t, names, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testRule9
+NumericMatrix testRule9(NumericMatrix td, arma::mat dummy_df, NumericVector dummy_t, StringVector names, NumericMatrix m);
+RcppExport SEXP _lslearn_testRule9(SEXP tdSEXP, SEXP dummy_dfSEXP, SEXP dummy_tSEXP, SEXP namesSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type dummy_df(dummy_dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dummy_t(dummy_tSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(testRule9(td, dummy_df, dummy_t, names, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testRule10
+NumericMatrix testRule10(NumericMatrix td, arma::mat dummy_df, NumericVector dummy_t, StringVector names, NumericMatrix m);
+RcppExport SEXP _lslearn_testRule10(SEXP tdSEXP, SEXP dummy_dfSEXP, SEXP dummy_tSEXP, SEXP namesSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type dummy_df(dummy_dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dummy_t(dummy_tSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(testRule10(td, dummy_df, dummy_t, names, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testAllRules
+NumericMatrix testAllRules(NumericMatrix td, arma::mat dummy_df, NumericVector dummy_t, StringVector names, NumericMatrix m);
+RcppExport SEXP _lslearn_testAllRules(SEXP tdSEXP, SEXP dummy_dfSEXP, SEXP dummy_tSEXP, SEXP namesSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type dummy_df(dummy_dfSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dummy_t(dummy_tSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(testAllRules(td, dummy_df, dummy_t, names, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// testConvertMixed
+NumericMatrix testConvertMixed(NumericMatrix td, NumericVector t, StringVector names, NumericMatrix m, NumericVector v);
+RcppExport SEXP _lslearn_testConvertMixed(SEXP tdSEXP, SEXP tSEXP, SEXP namesSEXP, SEXP mSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type td(tdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(testConvertMixed(td, t, names, m, v));
+    return rcpp_result_gen;
+END_RCPP
+}
 // printS
 void printS(NumericVector neighbors);
 RcppExport SEXP _lslearn_printS(SEXP neighborsSEXP) {
@@ -1338,6 +1761,10 @@ RcppExport SEXP run_testthat_tests(SEXP);
 static const R_CallMethodDef CallEntries[] = {
     {"_lslearn_sampleSNL", (DL_FUNC) &_lslearn_sampleSNL, 10},
     {"_lslearn_popSNL", (DL_FUNC) &_lslearn_popSNL, 6},
+    {"_lslearn_sampleCML", (DL_FUNC) &_lslearn_sampleCML, 10},
+    {"_lslearn_popCML", (DL_FUNC) &_lslearn_popCML, 6},
+    {"_lslearn_sampleCML_mag", (DL_FUNC) &_lslearn_sampleCML_mag, 10},
+    {"_lslearn_popCML_mag", (DL_FUNC) &_lslearn_popCML_mag, 6},
     {"_lslearn_validateTargetSNL", (DL_FUNC) &_lslearn_validateTargetSNL, 2},
     {"_lslearn_combn_cpp", (DL_FUNC) &_lslearn_combn_cpp, 2},
     {"_lslearn_isMember", (DL_FUNC) &_lslearn_isMember, 2},
@@ -1349,6 +1776,20 @@ static const R_CallMethodDef CallEntries[] = {
     {"_lslearn_get_G2_one", (DL_FUNC) &_lslearn_get_G2_one, 4},
     {"_lslearn_get_G2_all", (DL_FUNC) &_lslearn_get_G2_all, 3},
     {"_lslearn_condInttestdis", (DL_FUNC) &_lslearn_condInttestdis, 5},
+    {"_lslearn_initializeCML", (DL_FUNC) &_lslearn_initializeCML, 5},
+    {"_lslearn_initializeCMLPop", (DL_FUNC) &_lslearn_initializeCMLPop, 4},
+    {"_lslearn_getSizeCML", (DL_FUNC) &_lslearn_getSizeCML, 5},
+    {"_lslearn_setSCML", (DL_FUNC) &_lslearn_setSCML, 8},
+    {"_lslearn_setVerboseCML", (DL_FUNC) &_lslearn_setVerboseCML, 5},
+    {"_lslearn_checkSkeletonTotal", (DL_FUNC) &_lslearn_checkSkeletonTotal, 5},
+    {"_lslearn_checkSkeletonTotalPop", (DL_FUNC) &_lslearn_checkSkeletonTotalPop, 4},
+    {"_lslearn_checkVStruct", (DL_FUNC) &_lslearn_checkVStruct, 5},
+    {"_lslearn_checkVStructPop", (DL_FUNC) &_lslearn_checkVStructPop, 4},
+    {"_lslearn_checkAdjMatConversion", (DL_FUNC) &_lslearn_checkAdjMatConversion, 7},
+    {"_lslearn_checkNotationWarnings", (DL_FUNC) &_lslearn_checkNotationWarnings, 6},
+    {"_lslearn_checkSeparationTest", (DL_FUNC) &_lslearn_checkSeparationTest, 9},
+    {"_lslearn_checkCMLSummary", (DL_FUNC) &_lslearn_checkCMLSummary, 5},
+    {"_lslearn_checkCMLSummaryPop", (DL_FUNC) &_lslearn_checkCMLSummaryPop, 4},
     {"_lslearn_testArmaCor", (DL_FUNC) &_lslearn_testArmaCor, 1},
     {"_lslearn_testConstructSample", (DL_FUNC) &_lslearn_testConstructSample, 10},
     {"_lslearn_testConstructPop", (DL_FUNC) &_lslearn_testConstructPop, 6},
@@ -1407,6 +1848,15 @@ static const R_CallMethodDef CallEntries[] = {
     {"_lslearn_test_subset_mat", (DL_FUNC) &_lslearn_test_subset_mat, 2},
     {"_lslearn_test_NumMat_value", (DL_FUNC) &_lslearn_test_NumMat_value, 1},
     {"_lslearn_test_decrement_matrix", (DL_FUNC) &_lslearn_test_decrement_matrix, 1},
+    {"_lslearn_testRule1", (DL_FUNC) &_lslearn_testRule1, 5},
+    {"_lslearn_testRule2", (DL_FUNC) &_lslearn_testRule2, 5},
+    {"_lslearn_testRule3", (DL_FUNC) &_lslearn_testRule3, 5},
+    {"_lslearn_testRule4", (DL_FUNC) &_lslearn_testRule4, 8},
+    {"_lslearn_testRule8", (DL_FUNC) &_lslearn_testRule8, 5},
+    {"_lslearn_testRule9", (DL_FUNC) &_lslearn_testRule9, 5},
+    {"_lslearn_testRule10", (DL_FUNC) &_lslearn_testRule10, 5},
+    {"_lslearn_testAllRules", (DL_FUNC) &_lslearn_testAllRules, 5},
+    {"_lslearn_testConvertMixed", (DL_FUNC) &_lslearn_testConvertMixed, 5},
     {"_lslearn_printS", (DL_FUNC) &_lslearn_printS, 1},
     {"_lslearn_getInitialValues", (DL_FUNC) &_lslearn_getInitialValues, 3},
     {"_lslearn_setListEmptySet", (DL_FUNC) &_lslearn_setListEmptySet, 3},

@@ -40,7 +40,7 @@ public:
   NumericVector getRulesUsed() { return rules_used; };
 
 private:
-  std::map<int, int> node_numbering;
+  std::map<size_t, size_t> node_numbering;
   std::vector<double> target_skeleton_times;
   NumericVector rules_used = NumericVector(5);
 };

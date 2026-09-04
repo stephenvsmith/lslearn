@@ -41,6 +41,66 @@ popSNL <- function(true_dag, targets, nodes_interest, names, lmax = 3L, verbose 
     .Call(`_lslearn_popSNL`, true_dag, targets, nodes_interest, names, lmax, verbose)
 }
 
+#' Run the sample (or semi-sample) version of CML and collect its results
+#'
+#' Internal building block for `cml()`; end users should call `cml()`
+#' rather than this function directly.
+#'
+#' @inheritParams sampleSNL
+#' @returns A list with the estimated graph (`G`), separating sets (`S`),
+#'   test counts, node ordering, orientation rule usage, skeleton timing,
+#'   and total timing information; see `cml()` for the user-facing result
+#'   shape.
+#' @noRd
+sampleCML <- function(true_dag, df, targets, nodes_interest, names, lmax = 3L, signif_level = 0.01, verbose = TRUE, test = "testIndFisher", estDAG = FALSE) {
+    .Call(`_lslearn_sampleCML`, true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG)
+}
+
+#' Run the population (oracle) version of CML and collect its results
+#'
+#' Internal building block for `cml()`; end users should call `cml()`
+#' rather than this function directly.
+#'
+#' @inheritParams sampleSNL
+#' @returns Same shape as `sampleCML()`, minus the sample-only
+#'   `algorithmTotalTime` entry.
+#' @noRd
+popCML <- function(true_dag, targets, nodes_interest, names, lmax = 3L, verbose = TRUE) {
+    .Call(`_lslearn_popCML`, true_dag, targets, nodes_interest, names, lmax, verbose)
+}
+
+#' Run the sample (or semi-sample) MAG-only version of CML and collect its
+#' results
+#'
+#' Internal building block for `cml_mag()`; end users should call
+#' `cml_mag()` rather than this function directly. Identical to
+#' `sampleCML()` except it calls `CML::run_mag()`, which skips the
+#' within-neighborhood mixed-graph conversion rules
+#' (`CML::convertMixedGraph()`), leaving the result as an ancestral
+#' (MAG-style) graph rather than converting it to the CML-specific
+#' neighborhood notation.
+#'
+#' @inheritParams sampleSNL
+#' @returns Same shape as `sampleCML()`.
+#' @noRd
+sampleCML_mag <- function(true_dag, df, targets, nodes_interest, names, lmax = 3L, signif_level = 0.01, verbose = TRUE, test = "testIndFisher", estDAG = FALSE) {
+    .Call(`_lslearn_sampleCML_mag`, true_dag, df, targets, nodes_interest, names, lmax, signif_level, verbose, test, estDAG)
+}
+
+#' Run the population (oracle) MAG-only version of CML and collect its
+#' results
+#'
+#' Internal building block for `cml_mag()`; end users should call
+#' `cml_mag()` rather than this function directly.
+#'
+#' @inheritParams sampleSNL
+#' @returns Same shape as `sampleCML_mag()`, minus the sample-only
+#'   `algorithmTotalTime` entry.
+#' @noRd
+popCML_mag <- function(true_dag, targets, nodes_interest, names, lmax = 3L, verbose = TRUE) {
+    .Call(`_lslearn_popCML_mag`, true_dag, targets, nodes_interest, names, lmax, verbose)
+}
+
 #' Validate that a target node is a member of the target vector
 #'
 #' @param targets Numeric vector of 0-based target node indices.
@@ -214,6 +274,62 @@ get_G2_all <- function(A, B, S) {
 #' @noRd
 condInttestdis <- function(df, i, j, k, signif_level) {
     .Call(`_lslearn_condInttestdis`, df, i, j, k, signif_level)
+}
+
+initializeCML <- function(td, df, t, nodes_interest, names) {
+    invisible(.Call(`_lslearn_initializeCML`, td, df, t, nodes_interest, names))
+}
+
+initializeCMLPop <- function(td, t, nodes_interest, names) {
+    invisible(.Call(`_lslearn_initializeCMLPop`, td, t, nodes_interest, names))
+}
+
+getSizeCML <- function(td, df, t, nodes_interest, names) {
+    .Call(`_lslearn_getSizeCML`, td, df, t, nodes_interest, names)
+}
+
+setSCML <- function(td, df, t, nodes_interest, names, i, j, k) {
+    .Call(`_lslearn_setSCML`, td, df, t, nodes_interest, names, i, j, k)
+}
+
+setVerboseCML <- function(td, df, t, nodes_interest, names) {
+    invisible(.Call(`_lslearn_setVerboseCML`, td, df, t, nodes_interest, names))
+}
+
+checkSkeletonTotal <- function(td, df, t, nodes_interest, names) {
+    .Call(`_lslearn_checkSkeletonTotal`, td, df, t, nodes_interest, names)
+}
+
+checkSkeletonTotalPop <- function(td, t, nodes_interest, names) {
+    .Call(`_lslearn_checkSkeletonTotalPop`, td, t, nodes_interest, names)
+}
+
+checkVStruct <- function(td, df, t, nodes_interest, names) {
+    .Call(`_lslearn_checkVStruct`, td, df, t, nodes_interest, names)
+}
+
+checkVStructPop <- function(td, t, nodes_interest, names) {
+    .Call(`_lslearn_checkVStructPop`, td, t, nodes_interest, names)
+}
+
+checkAdjMatConversion <- function(td, df, t, nodes_interest, names, m, neighbors) {
+    .Call(`_lslearn_checkAdjMatConversion`, td, df, t, nodes_interest, names, m, neighbors)
+}
+
+checkNotationWarnings <- function(td, df, t, nodes_interest, names, m) {
+    .Call(`_lslearn_checkNotationWarnings`, td, df, t, nodes_interest, names, m)
+}
+
+checkSeparationTest <- function(td, df, t, nodes_interest, names, i, j, l, nodes_to_skip) {
+    .Call(`_lslearn_checkSeparationTest`, td, df, t, nodes_interest, names, i, j, l, nodes_to_skip)
+}
+
+checkCMLSummary <- function(td, df, targets, nodes_interest, names) {
+    .Call(`_lslearn_checkCMLSummary`, td, df, targets, nodes_interest, names)
+}
+
+checkCMLSummaryPop <- function(td, targets, nodes_interest, names) {
+    .Call(`_lslearn_checkCMLSummaryPop`, td, targets, nodes_interest, names)
 }
 
 testArmaCor <- function(M) {
@@ -446,6 +562,42 @@ test_NumMat_value <- function(G) {
 
 test_decrement_matrix <- function(G) {
     invisible(.Call(`_lslearn_test_decrement_matrix`, G))
+}
+
+testRule1 <- function(td, dummy_df, dummy_t, names, m) {
+    .Call(`_lslearn_testRule1`, td, dummy_df, dummy_t, names, m)
+}
+
+testRule2 <- function(td, dummy_df, dummy_t, names, m) {
+    .Call(`_lslearn_testRule2`, td, dummy_df, dummy_t, names, m)
+}
+
+testRule3 <- function(td, dummy_df, dummy_t, names, m) {
+    .Call(`_lslearn_testRule3`, td, dummy_df, dummy_t, names, m)
+}
+
+testRule4 <- function(td, dummy_df, dummy_t, names, m, i, j, k) {
+    .Call(`_lslearn_testRule4`, td, dummy_df, dummy_t, names, m, i, j, k)
+}
+
+testRule8 <- function(td, dummy_df, dummy_t, names, m) {
+    .Call(`_lslearn_testRule8`, td, dummy_df, dummy_t, names, m)
+}
+
+testRule9 <- function(td, dummy_df, dummy_t, names, m) {
+    .Call(`_lslearn_testRule9`, td, dummy_df, dummy_t, names, m)
+}
+
+testRule10 <- function(td, dummy_df, dummy_t, names, m) {
+    .Call(`_lslearn_testRule10`, td, dummy_df, dummy_t, names, m)
+}
+
+testAllRules <- function(td, dummy_df, dummy_t, names, m) {
+    .Call(`_lslearn_testAllRules`, td, dummy_df, dummy_t, names, m)
+}
+
+testConvertMixed <- function(td, t, names, m, v) {
+    .Call(`_lslearn_testConvertMixed`, td, t, names, m, v)
 }
 
 printS <- function(neighbors) {
