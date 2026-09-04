@@ -117,7 +117,6 @@ void CML::getSkeletonTarget(const size_t &t) {
   // We should start with l=1 because we've already done l=0 previously
   size_t l = 0;
   bool cont = true;
-  NumericVector neighbors;
   NumericVector edges_i;
   NumericMatrix kvals;
 
@@ -172,27 +171,38 @@ void CML::getSkeletonTarget(const size_t &t) {
           if (verbose) {
             Rcout << "The value of j is " << j << std::endl;
           }
-          // Find neighbors of i and j from the true DAG (or they are
-          // estimated) These neighbors are using the true node numbers
-          // (check documentation for this function)
+          // Find neighbors of i and of j separately from the true DAG (or
+          // they are estimated) using the true node numbers (check
+          // documentation for this function). Per Algorithm 1 (line 9), we
+          // search N1_i \ {j} and N1_j \ {i} as two separate candidate
+          // pools, not their union.
           bool tmp = mb_list->silencer();
-          neighbors = mb_list->getMBMultipleTargets(
-              NumericVector::create(neighborhood(i), neighborhood(j)),
-              false, // not including i and j
-              true); // We include the last argument to remove i and j
+          NumericVector neighbors_i =
+              setdiff(mb_list->getMB(neighborhood(i)),
+                      NumericVector::create(neighborhood(j)));
+          NumericVector neighbors_j =
+              setdiff(mb_list->getMB(neighborhood(j)),
+                      NumericVector::create(neighborhood(i)));
           mb_list->removeSilencer(tmp);
           if (verbose) {
-            printVecElementsNoNames(neighbors,
-                                    "Potential separating nodes: ", "\n");
+            printVecElementsNoNames(
+                neighbors_i,
+                "Potential separating nodes (from i's MB): ", "\n");
+            printVecElementsNoNames(
+                neighbors_j,
+                "Potential separating nodes (from j's MB): ", "\n");
           }
           // If there are enough potential neighbors to match the current
           // separating set size, we continue
-          if (neighbors.length() >= l) {
+          if (neighbors_i.length() >= l) {
             cont = true;
-            if (verbose) {
-              Rcout << "There are " << neighbors.length() << " neighbor(s).\n";
-            }
-            kvals = combn_cpp(neighbors, l);
+            kvals = combn_cpp(neighbors_i, l);
+            checkSeparation(l, i, j, kvals);
+          }
+          // Only try j's own Mb if i and j haven't already been separated
+          if (C_tilde->getAmatVal(i, j) != 0 && neighbors_j.length() >= l) {
+            cont = true;
+            kvals = combn_cpp(neighbors_j, l);
             checkSeparation(l, i, j, kvals);
           }
         }
