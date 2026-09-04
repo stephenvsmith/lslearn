@@ -45,8 +45,11 @@ cml <- function(data = NULL, true_dag = NULL, targets,
   if (lmax < 0) {
     stop("Invalid lmax value")
   }
+  if (is.null(data) && is.null(true_dag)) {
+    stop("At least one of `data` or `true_dag` must be supplied")
+  }
 
-  p <- ifelse(is.null(data), ncol(true_dag), ncol(data))
+  p <- if (is.null(data)) ncol(true_dag) else ncol(data)
   if (is.null(node_names)) {
     node_names <- paste0("V", 0:(p - 1))
   }
@@ -163,8 +166,11 @@ cml_mag <- function(data = NULL, true_dag = NULL, targets,
   if (lmax < 0) {
     stop("Invalid lmax value")
   }
+  if (is.null(data) && is.null(true_dag)) {
+    stop("At least one of `data` or `true_dag` must be supplied")
+  }
 
-  p <- ifelse(is.null(data), ncol(true_dag), ncol(data))
+  p <- if (is.null(data)) ncol(true_dag) else ncol(data)
   if (is.null(node_names)) {
     node_names <- paste0("V", 0:(p - 1))
   }
