@@ -205,6 +205,13 @@ void CML::getSkeletonTarget(const size_t &t) {
             kvals = combn_cpp(neighbors_j, l);
             checkSeparation(l, i, j, kvals);
           }
+          // Record pairs separated here (phase 2, within this target's own
+          // neighborhood) so getVStructures()/rule4() can apply the
+          // paper's phase-dependent restrictions to them.
+          if (C_tilde->getAmatVal(i, j) == 0) {
+            phase2_neighborhoods[orderedPair(i, j)] =
+                clone(target_neighborhood);
+          }
         }
       }
     }
@@ -281,6 +288,15 @@ int CML::getVStructures() {
           }
           j_adj = C_tilde->getAdjacent(j);
           k_vals = intersect(i_adj, j_adj); // k must be a neighbor of i and j
+          // Phase-dependent R0 (paper, Theorem 5 proof fix (1)): if i and j
+          // were separated during phase 2 (within a single target's own
+          // neighborhood), only consider k in that same neighborhood --
+          // phase-2 separating sets aren't guaranteed to m-separate i and j
+          // from a k reached only through a between-neighborhood path.
+          auto phase2_it = phase2_neighborhoods.find(orderedPair(i, j));
+          if (phase2_it != phase2_neighborhoods.end()) {
+            k_vals = intersect(k_vals, phase2_it->second);
+          }
           std::sort(k_vals.begin(), k_vals.end());
           if (verbose && k_vals.length() > 0) {
             Rcout << "Potential k values: ";
@@ -594,6 +610,18 @@ bool CML::rule4(bool &track_changes) {
               md_path = C_tilde->minDiscPath(alpha, beta, gamma);
               if (md_path(0) == -1) {
                 Rcout << "No discriminating path for these nodes.\n";
+              } else if (phase2_neighborhoods.count(orderedPair(
+                             static_cast<size_t>(md_path(0)), gamma)) > 0) {
+                // Do not apply Rule 4 if theta-gamma was separated during
+                // phase 2 (paper, Theorem 5 proof fix (2)): Rule 4 is only
+                // valid when the discriminating path has a node outside
+                // theta and gamma's shared neighborhood, which a phase-2
+                // separation doesn't guarantee.
+                if (verbose) {
+                  Rcout << "\nRule 4\nSkipping: theta-gamma edge ("
+                        << md_path(0) << ", " << gamma
+                        << ") was separated during phase 2.\n";
+                }
               } else {
                 // Check if beta separates theta and gamma
                 if (check_sep_r4(beta, md_path)) {
@@ -931,6 +959,32 @@ bool CML::rule10(bool &track_changes) {
   return track_changes;
 }
 
+// Additional rule (paper, Theorem 5 proof fix (3)): any edge left with a
+// circle at one end and a tail at the other cannot remain ambiguous, since
+// a tail already rules out the bidirected (collider) possibility at that
+// end -- so the circle end must be an arrowhead. Orient alpha o-- beta
+// (circle at alpha, tail at beta) as alpha <- beta (arrow at alpha, tail
+// preserved at beta).
+bool CML::ruleCircleTail(bool &track_changes) {
+  for (size_t alpha = 0; alpha < N; ++alpha) {
+    for (size_t beta = 0; beta < N; ++beta) {
+      if (C_tilde->getAmatVal(beta, alpha) == 1 && // circle at alpha
+          C_tilde->getAmatVal(alpha, beta) == 3) { // tail at beta
+        C_tilde->setAmatVal(beta, alpha, 2);       // arrow at alpha
+        track_changes = true;
+        ++rules_used(11);
+        if (verbose) {
+          Rcout << "\nCircle-tail rule:\nOrient: " << alpha << " o-- " << beta;
+          Rcout << " as " << alpha << " <- " << beta << std::endl;
+          Rcout << "Circle-tail rule has been used " << rules_used(11)
+                << " times.\n";
+        }
+      }
+    }
+  }
+  return track_changes;
+}
+
 void CML::allRules() {
   bool track_changes = true;
   while (track_changes) {
@@ -942,6 +996,7 @@ void CML::allRules() {
     track_changes = rule8(track_changes);
     track_changes = rule9(track_changes);
     track_changes = rule10(track_changes);
+    track_changes = ruleCircleTail(track_changes);
   }
 }
 

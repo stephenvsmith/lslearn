@@ -135,5 +135,5 @@ test_that("Discrete version", {
     0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 0, 0, 0
   ), nrow = 8, byrow = TRUE))
-  expect_equal(asia_d_cml$RulesUsed, c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+  expect_equal(asia_d_cml$RulesUsed, c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
 })

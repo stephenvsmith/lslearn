@@ -61,6 +61,9 @@ public:
   bool rule10simple(const size_t &alpha, const size_t &beta,
                     const size_t &gamma, const size_t &d);
   bool rule10(bool &track_changes);
+  // Additional rule (paper, Theorem 5 proof fix (3)): resolve any
+  // remaining circle-tail edge as a directed (arrow-tail) edge.
+  bool ruleCircleTail(bool &track_changes);
   // All rules
   void allRules();
 
@@ -76,9 +79,20 @@ public:
 
 private:
   std::map<size_t, size_t> node_numbering;
-  NumericVector rules_used = NumericVector(11);
+  NumericVector rules_used = NumericVector(12);
   std::vector<double> target_skeleton_times;
   double total_skeleton_time;
+
+  // Tracks pairs (i,j) whose edge was removed during phase 2 (a single
+  // target's local skeleton refinement, getSkeletonTarget()), mapped to
+  // the local-index members of that target's neighborhood at the time.
+  // Used to apply the paper's phase-dependent fixes to R0 and R4 (see
+  // Theorem 5 proof, fixes (1) and (2)): between-neighborhood paths
+  // don't have the coverage guarantees phase-1-separated pairs do.
+  std::map<std::pair<size_t, size_t>, NumericVector> phase2_neighborhoods;
+  static std::pair<size_t, size_t> orderedPair(size_t i, size_t j) {
+    return i < j ? std::make_pair(i, j) : std::make_pair(j, i);
+  }
 };
 
 #endif
