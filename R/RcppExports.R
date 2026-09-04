@@ -101,6 +101,88 @@ popCML_mag <- function(true_dag, targets, nodes_interest, names, lmax = 3L, verb
     .Call(`_lslearn_popCML_mag`, true_dag, targets, nodes_interest, names, lmax, verbose)
 }
 
+#' @noRd
+getEdgeNumber <- function(G) {
+    .Call(`_lslearn_getEdgeNumber`, G)
+}
+
+#' @noRd
+sharedNeighborhood <- function(reference, targets, i, j, verbose = FALSE) {
+    .Call(`_lslearn_sharedNeighborhood`, reference, targets, i, j, verbose)
+}
+
+#' @noRd
+inTargetNeighborhood <- function(reference, targets, i, verbose = FALSE) {
+    .Call(`_lslearn_inTargetNeighborhood`, reference, targets, i, verbose)
+}
+
+#' @noRd
+compareSkeletons <- function(est, truth, verbose = FALSE) {
+    .Call(`_lslearn_compareSkeletons`, est, truth, verbose)
+}
+
+#' @noRd
+compareVStructures <- function(est, truth, verbose = FALSE) {
+    .Call(`_lslearn_compareVStructures`, est, truth, verbose)
+}
+
+#' @noRd
+parentRecoveryAccuracy <- function(est, truth, targets, verbose = FALSE) {
+    .Call(`_lslearn_parentRecoveryAccuracy`, est, truth, targets, verbose)
+}
+
+#' @noRd
+interNeighborhoodEdgeMetrics <- function(est, reference, true_dag, nbhd, verbose = FALSE) {
+    .Call(`_lslearn_interNeighborhoodEdgeMetrics`, est, reference, true_dag, nbhd, verbose)
+}
+
+#' @noRd
+overallF1 <- function(est, ref, targets, verbose = FALSE) {
+    .Call(`_lslearn_overallF1`, est, ref, targets, verbose)
+}
+
+#' Score an Estimated Graph Against a Ground-Truth DAG
+#'
+#' `allMetrics()` bundles every graph-comparison metric in this file
+#' (skeleton recovery, v-structure recovery, parent-recovery accuracy for
+#' `targets`, cross-neighborhood ancestral-edge recovery, and the overall
+#' F1 score) into a single one-row data frame, for evaluating the output
+#' of `cml()`/`snl()` against a known ground-truth network.
+#'
+#' @param est The estimated adjacency matrix (e.g. `cml()`'s or `snl()`'s
+#'   `amat` result).
+#' @param ref_graph The ground-truth adjacency matrix restricted to the
+#'   same nodes as `est`, used for the skeleton/v-structure/parent-recovery
+#'   metrics.
+#' @param targets 0-based target node indices (in `est`'s numbering), used
+#'   for the parent-recovery and F1 metrics.
+#' @param true_dag The full ground-truth adjacency matrix (over all nodes
+#'   in the original network, not just the ones in `est`), used to check
+#'   ancestral relationships for `interNeighborhoodEdgeMetrics()`.
+#' @param nbhd A mapping from `est`'s node numbering to `true_dag`'s node
+#'   numbering (i.e. `est`'s neighborhood, in `true_dag`'s indices).
+#' @param verbose Whether to print detailed output.
+#' @param algo A short label for the algorithm being evaluated (e.g.
+#'   `"cml"`, `"snl"`, `"pc"`), used as a prefix on most column names.
+#' @param which_nodes An additional label distinguishing this evaluation
+#'   run (e.g. which subset of nodes it covers), used as a prefix on the
+#'   skeleton/v-structure column names alongside `algo`.
+#' @returns A one-row data frame with skeleton false positives/negatives/
+#'   true positives, v-structure false positives/negatives/true positives,
+#'   parent-recovery false positives/negatives/true positives/potentials,
+#'   ancestral-edge recovery counts, and the overall F1 score -- all column
+#'   names prefixed with `algo` (and `which_nodes` for the skeleton/
+#'   v-structure columns).
+#' @export
+allMetrics <- function(est, ref_graph, targets, true_dag, nbhd, verbose = FALSE, algo = "pc", which_nodes = "") {
+    .Call(`_lslearn_allMetrics`, est, ref_graph, targets, true_dag, nbhd, verbose, algo, which_nodes)
+}
+
+#' @noRd
+getNeighborhoodMetrics <- function(G) {
+    .Call(`_lslearn_getNeighborhoodMetrics`, G)
+}
+
 #' Validate that a target node is a member of the target vector
 #'
 #' @param targets Numeric vector of 0-based target node indices.
