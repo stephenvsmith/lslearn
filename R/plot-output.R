@@ -13,16 +13,20 @@ plot_output <- function(local_output, true_dag) {
   nodes_used <- local_output$Nodes
   node_names <- colnames(true_dag)[nodes_used]
 
-  # Estimated graph
+  # amat is already embedded back into the full node space (true_dag's own
+  # numbering) by convertFinalGraph(), so it's subset the same way as
+  # true_dag itself
   g_est <- bnlearn::empty.graph(node_names)
   bnlearn::amat(g_est) <- local_output$amat[nodes_used, nodes_used]
 
-  # True DAG
+  # True DAG, restricted to the same nodes
   g_true <- bnlearn::empty.graph(node_names)
   bnlearn::amat(g_true) <- true_dag[nodes_used, nodes_used]
 
-  # Plot them side-by-side (estimated | true)
-  graphics::par(mfrow = c(1, 2))
+  # Plot them side-by-side (estimated | true), restoring the caller's
+  # plotting layout afterwards
+  old_par <- graphics::par(mfrow = c(1, 2))
+  on.exit(graphics::par(old_par))
   bnlearn::graphviz.plot(g_est)
   bnlearn::graphviz.plot(g_true)
 }

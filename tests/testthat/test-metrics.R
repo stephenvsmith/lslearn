@@ -611,7 +611,7 @@ test_that("Completing ancestral checks", {
   est_amat[, 8] <- est_amat[8, ] <- est_amat[7, ] <- est_amat[, 7] <- rep(0, 8)
   expect_output(
     result <- interNeighborhoodEdgeMetrics(
-      est_amat, t_amat, t_amat, seq(0, 5),
+      est_amat, t_amat, t_amat, seq(0, 7),
       verbose = TRUE
     )
   )
@@ -638,7 +638,7 @@ test_that("Completing ancestral checks (2)", {
   est_amat[, 8] <- est_amat[8, ] <- est_amat[7, ] <- est_amat[, 7] <- rep(0, 8)
   expect_output(
     result <- interNeighborhoodEdgeMetrics(
-      est_amat, t_amat, t_amat, seq(0, 5),
+      est_amat, t_amat, t_amat, seq(0, 7),
       verbose = TRUE
     )
   )
@@ -725,7 +725,7 @@ test_that("checking metric functions for cml", {
   # bronc, have all parents except for tub and either, which are both
   # potential
   result <- allMetrics(
-    est$amat, asia_dag_sub, t - 1, asiaDAG, est$Nodes,
+    est$amat, asia_dag_sub, t - 1, asiaDAG, seq(0, ncol(asiaDAG) - 1),
     algo = "cml"
   )
   expect_equal(result, data.frame(
@@ -757,7 +757,7 @@ test_that("checking metric functions for pc", {
   # skeleton perfect (smoke edges don't count), missing both v-structures
   # and added 1, missing all parents, either got two fp parents
   result <- allMetrics(
-    pc_asia, asia_dag_sub, t - 1, asiaDAG, est$Nodes,
+    pc_asia, asia_dag_sub, t - 1, asiaDAG, seq(0, ncol(asiaDAG) - 1),
     algo = "pc"
   )
   expect_equal(result, data.frame(

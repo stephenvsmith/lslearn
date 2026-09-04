@@ -8,6 +8,7 @@
 #include "PDAG.h"
 #include "SharedFunctions.h"
 #include <algorithm>
+#include <cmath>
 #include <string>
 using namespace Rcpp;
 
@@ -24,6 +25,14 @@ static void validateInputs(NumericMatrix est, NumericMatrix truth) {
 
 // Ensure that the inputted target values are valid
 static void validateTargets(NumericMatrix g, NumericVector targets) {
+  for (NumericVector::iterator it = targets.begin(); it < targets.end(); ++it) {
+    if (!R_finite(*it)) {
+      stop("Invalid target index: NA/NaN/Inf value(s) not allowed");
+    }
+    if (*it != std::floor(*it)) {
+      stop("Invalid target index: non-integer value(s) not allowed");
+    }
+  }
   if (is_true(any(targets > g.ncol() - 1))) {
     stop("Invalid target index: value(s) greater than size of graph");
   } else if (is_true(any(targets < 0))) {
@@ -59,13 +68,11 @@ int getEdgeNumber(NumericMatrix G) {
 // [[Rcpp::export]]
 bool sharedNeighborhood(NumericMatrix reference, NumericVector targets, int i,
                         int j, bool verbose = false) {
+  validateTargets(reference, targets);
+  validateTargets(reference, NumericVector::create(i, j));
   int p = reference.nrow();
   StringVector node_names;
-  for (int i = 0; i < p; ++i) {
-    String node("V");
-    node += i;
-    node_names.push_back(node);
-  }
+  makeNodeNames(p, node_names);
 
   PDAG g_ref(p, node_names, reference);
   for (NumericVector::iterator it = targets.begin(); it < targets.end(); ++it) {
@@ -95,13 +102,10 @@ bool sharedNeighborhood(NumericMatrix reference, NumericVector targets, int i,
 bool inTargetNeighborhood(NumericMatrix reference, NumericVector targets, int i,
                           bool verbose = false) {
   validateTargets(reference, targets);
+  validateTargets(reference, NumericVector::create(i));
   int p = reference.nrow();
   StringVector node_names;
-  for (int j = 0; j < p; ++j) {
-    String node("V");
-    node += j;
-    node_names.push_back(node);
-  }
+  makeNodeNames(p, node_names);
   PDAG g_ref(p, node_names, reference);
   for (NumericVector::iterator it = targets.begin(); it < targets.end(); ++it) {
     // Check if i is in target neighborhood
@@ -446,6 +450,12 @@ List interNeighborhoodEdgeMetrics(NumericMatrix est, NumericMatrix reference,
                                   NumericMatrix true_dag, NumericVector nbhd,
                                   bool verbose = false) {
   int p = est.nrow();
+  if (nbhd.length() != p) {
+    stop("Invalid nbhd: length (%i) must match the number of nodes in est "
+         "(%i)",
+         nbhd.length(), p);
+  }
+  validateTargets(true_dag, nbhd);
   size_t true_anc = 0;
   size_t incorrect_anc = 0;
   size_t total_anc_edges = 0;
@@ -633,11 +643,11 @@ DataFrame allMetrics(NumericMatrix est, NumericMatrix ref_graph,
   validateInputs(est, ref_graph);
   validateTargets(ref_graph, targets);
   // Find the metrics for comparing the graphs
-  List est_skeleton = compareSkeletons(est, ref_graph);
-  List est_vstruct = compareVStructures(est, ref_graph);
-  List est_pra = parentRecoveryAccuracy(est, ref_graph, targets);
+  List est_skeleton = compareSkeletons(est, ref_graph, verbose);
+  List est_vstruct = compareVStructures(est, ref_graph, verbose);
+  List est_pra = parentRecoveryAccuracy(est, ref_graph, targets, verbose);
   List est_ancestors =
-      interNeighborhoodEdgeMetrics(est, ref_graph, true_dag, nbhd);
+      interNeighborhoodEdgeMetrics(est, ref_graph, true_dag, nbhd, verbose);
   return DataFrame::create(
       _[algo + "_" + which_nodes + "_skel_fp"] = est_skeleton["skel_fp"],
       _[algo + "_" + which_nodes + "_skel_fn"] = est_skeleton["skel_fn"],
@@ -652,7 +662,7 @@ DataFrame allMetrics(NumericMatrix est, NumericMatrix ref_graph,
       _[algo + "_ancestors_correct"] = est_ancestors["CorrectAncestors"],
       _[algo + "_ancestors_incorrect"] = est_ancestors["IncorrectAncestors"],
       _[algo + "_ancestors_total"] = est_ancestors["TotalAncestralEdges"],
-      _[algo + "_overall_f1"] = overallF1(est, ref_graph, targets));
+      _[algo + "_overall_f1"] = overallF1(est, ref_graph, targets, verbose));
 }
 
 //' @noRd

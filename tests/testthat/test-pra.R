@@ -29,11 +29,11 @@ test_that("Testing Parent Recovery Accuracy Metrics", {
     pra, list(missing = 1, added = 3, correct = 1, potential = 1)
   )
 
-  # NOTE (faithfully ported from CML): allMetrics()'s verbose param is
-  # never forwarded to its sub-calls, so it never actually prints anything.
-  all_metrics <- allMetrics(
-    est_amat, true_amat, c(2, 4), true_amat, seq(0, ncol(est_amat)),
-    algo = "cml", verbose = TRUE
+  expect_output(
+    all_metrics <- allMetrics(
+      est_amat, true_amat, c(2, 4), true_amat, seq(0, ncol(est_amat) - 1),
+      algo = "cml", verbose = TRUE
+    )
   )
   expect_equal(all_metrics, data.frame(
     cml__skel_fp = 1, cml__skel_fn = 0, cml__skel_tp = 5,
