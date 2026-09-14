@@ -23,7 +23,7 @@ default_install_hook_types:
 repos:
   # 1. Standard file fixes
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
         stages: [pre-commit, pre-push]
@@ -36,7 +36,7 @@ repos:
 
   # 2. R code formatting and linting
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.3.9032
+    rev: v0.4.3.9030
     hooks:
       - id: style-files
         stages: [pre-commit]
@@ -53,7 +53,7 @@ repos:
 
   # 3. C++ formatting
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v18.1.5
+    rev: v23.1.1
     hooks:
       - id: clang-format
         types_or: [c++, c]
@@ -61,7 +61,7 @@ repos:
 
   # 4. Commitizen hook
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.27.0
+    rev: v4.18.1
     hooks:
       - id: commitizen
         stages: [commit-msg]
